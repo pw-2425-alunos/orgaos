@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Obras{% endblock %}</title>
+    <link rel="icon" type="image/svg+xml" href="{% static 'favicon.svg' %}">
     <link rel="stylesheet" href="{% static 'obras/ui.css' %}">
     {% block extra_head %}{% endblock %}
 </head>
@@ -30,10 +31,6 @@
         {% block content %}
         {% endblock %}
     </main>
-
-    <footer style="background: #2e271d; color: #d7c8af; padding: 1.5rem; text-align: center; margin-top: 3rem; font-size: 0.9rem;">
-        <p style="margin: 0;">© 2026</p>
-    </footer>
 
     {% block extra_scripts %}{% endblock %}
 </body>
