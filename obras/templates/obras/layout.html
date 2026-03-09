@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Obras{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'obras/ui.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a href="{% url 'landing' %}" style="text-decoration: none; color: inherit; font-weight: 700;">Obras para Órgãos</a>
+        </div>
+        <div class="navbar-right">
+            <a href="{% url 'landing' %}" class="nav-link">Home</a>
+            <a href="{% url 'compositores' %}" class="nav-link">Compositores</a>
+            <a href="{% url 'pesquisa' %}" class="nav-link">Pesquisa</a>
+            {% if user.is_authenticated %}
+                <span class="user-badge">{{ user.username }}</span>
+                <a href="{% url 'logout' %}" class="nav-link">Sair</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="nav-link">Entrar</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main class="page">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer style="background: #2e271d; color: #d7c8af; padding: 1.5rem; text-align: center; margin-top: 3rem; font-size: 0.9rem;">
+        <p style="margin: 0;">© 2026</p>
+    </footer>
+
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,283 @@
+{% extends "obras/layout.html" %}
+
+{% block title %}Editar: {{ obra.titulo }}{% endblock %}
+
+{% block content %}
+        <section class="hero">
+            <h1>Editar Obra</h1>
+            <p class="subtitle">{{ obra.titulo }}</p>
+        </section>
+
+        <section class="card">
+            <form method="post" class="search-form">
+                {% csrf_token %}
+                
+                <div class="field-grid">
+                    <div class="field field-wide">
+                        <label for="titulo">Título *</label>
+                        <input id="titulo" type="text" name="titulo" value="{{ obra.titulo }}" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="compositor">Compositor *</label>
+                        <select id="compositor" name="compositor" required>
+                            {% for comp in compositores %}
+                                <option value="{{ comp.id }}"{% if obra.compositor.id == comp.id %} selected{% endif %}>{{ comp }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="ano">Ano</label>
+                        <input id="ano" type="number" min="1500" max="2100" name="ano" value="{{ obra.ano|default:'' }}">
+                    </div>
+
+                    <div class="field">
+                        <label for="genero">Género</label>
+                        <select id="genero" name="genero">
+                            <option value="">-</option>
+                            {% for gen in generos %}
+                                <option value="{{ gen.id }}"{% if obra.genero.id == gen.id %} selected{% endif %}>{{ gen.nome }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="tonalidade">Tonalidade</label>
+                        <select id="tonalidade" name="tonalidade">
+                            <option value="">-</option>
+                            {% for ton in tonalidades %}
+                                <option value="{{ ton.id }}"{% if obra.tonalidade.id == ton.id %} selected{% endif %}>{{ ton }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="field field-wide">
+                        <label for="efectivo_vocal">Efectivo Vocal</label>
+                        <input id="efectivo_vocal" type="text" name="efectivo_vocal" value="{{ obra.efectivo_vocal }}" placeholder="Ex: S.A.T.B">
+                    </div>
+
+                    <div class="field field-wide">
+                        <label for="efectivo_orgao">Efectivo Orgão</label>
+                        <input id="efectivo_orgao" type="text" name="efectivo_orgao" value="{{ obra.efectivo_orgao }}" placeholder="Ex: 2 órgãos">
+                    </div>
+
+                    <div class="field field-wide">
+                        <label for="descricao_fisica">Descrição Física</label>
+                        <textarea id="descricao_fisica" name="descricao_fisica" rows="3">{{ obra.descricao_fisica }}</textarea>
+                    </div>
+
+                    <div class="field field-wide">
+                        <label for="onomastica">Onomástica</label>
+                        <textarea id="onomastica" name="onomastica" rows="3">{{ obra.onomastica }}</textarea>
+                    </div>
+
+                    <div class="field field-wide">
+                        <label for="referencias">Referências</label>
+                        <textarea id="referencias" name="referencias" rows="3">{{ obra.referencias }}</textarea>
+                    </div>
+
+                    <!-- Órgãos e Registações -->
+                    <div class="field field-wide" style="border-top: 2px solid #d7c8af; padding-top: 1rem; margin-top: 1rem;">
+                        <h3 style="color: #4a3d2b; margin: 0 0 0.5rem 0; font-size: 1.1rem;">Órgãos e Registações</h3>
+                        <p style="margin: 0 0 1rem 0; color: #868070; font-size: 0.9rem;">Defina as características de cada órgão e suas registações. Especifique a extensão e os registos de cada teclado.</p>
+                        <div id="orgaos-container"></div>
+                        <button type="button" id="add-orgao-btn" style="padding: 0.5rem 1rem; background: #8a673c; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; margin-top: 0.5rem;">+ Adicionar Órgão</button>
+                    </div>
+                </div>
+
+                <div class="actions-row">
+                    <button type="submit" class="back">Guardar alterações</button>
+                    <a class="back back-secondary" href="{% url 'obra' obra.id %}">Cancelar</a>
+                </div>
+            </form>
+        </section>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script>
+        // Dados passados do Django
+        const notas = {{ notas_json|safe }};
+        const oitavas = {{ oitavas_json|safe }};
+        const registos = {{ registos_json|safe }};
+        const orgaosExistentes = {{ orgaos_json|safe }};
+
+        let orgaoCounter = 0;
+
+        document.getElementById('add-orgao-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            addOrgao();
+        });
+
+        // Carregar órgãos existentes ao abrir a página
+        window.addEventListener('DOMContentLoaded', function() {
+            orgaosExistentes.forEach(function(orgaoData) {
+                addOrgao(orgaoData);
+            });
+        });
+
+        function addOrgao(orgaoData = null) {
+            const container = document.getElementById('orgaos-container');
+            const orgaoNum = ++orgaoCounter;
+            const orgaoId = `orgao-${orgaoNum}`;
+
+            const notaOptions = notas.map(nota => 
+                `<option value="${nota.id}">${nota.nome}</option>`
+            ).join('');
+
+            const oitavaOptions = oitavas.map(oitava => 
+                `<option value="${oitava}">${oitava}</option>`
+            ).join('');
+
+            const orgaoHTML = `
+                <div class="orgao-card" id="${orgaoId}" style="background: #fbf7f0; border: 1px solid #d7c8af; border-radius: 10px; padding: 1rem; margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+                        <h4 style="margin: 0; color: #4a3d2b;">Órgão ${orgaoNum}</h4>
+                        <button type="button" onclick="removeOrgao('${orgaoId}')" style="background: #f1a7a6; color: white; border: none; padding: 0.35rem 0.6rem; border-radius: 6px; cursor: pointer; font-weight: 600;">✕ Remover</button>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-bottom: 0.8rem;">
+                        <div class="field" style="border: 1px solid #e5d7bf; border-radius: 8px; padding: 0.5rem;">
+                            <label style="font-size: 0.82rem;">Extensão Início</label>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.4rem;">
+                                <select name="orgao_${orgaoNum}_ext_inicio_nota" style="width: 100%; border: 1px solid #ccb79a; border-radius: 8px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b;">
+                                    <option value="">Nota</option>
+                                    ${notaOptions}
+                                </select>
+                                <select name="orgao_${orgaoNum}_ext_inicio_oitava" style="width: 100%; border: 1px solid #ccb79a; border-radius: 8px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b;">
+                                    <option value="">Oit.</option>
+                                    ${oitavaOptions}
+                                </select>
+                                <select name="orgao_${orgaoNum}_ext_inicio_tipo" style="width: 100%; border: 1px solid #ccb79a; border-radius: 8px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b;">
+                                    <option value="">Tipo</option>
+                                    <option value="*">*</option>
+                                    <option value="s/">s/</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="field" style="border: 1px solid #e5d7bf; border-radius: 8px; padding: 0.5rem;">
+                            <label style="font-size: 0.82rem;">Extensão Fim</label>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.4rem;">
+                                <select name="orgao_${orgaoNum}_ext_fim_nota" style="width: 100%; border: 1px solid #ccb79a; border-radius: 8px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b;">
+                                    <option value="">Nota</option>
+                                    ${notaOptions}
+                                </select>
+                                <select name="orgao_${orgaoNum}_ext_fim_oitava" style="width: 100%; border: 1px solid #ccb79a; border-radius: 8px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b;">
+                                    <option value="">Oit.</option>
+                                    ${oitavaOptions}
+                                </select>
+                                <select name="orgao_${orgaoNum}_ext_fim_tipo" style="width: 100%; border: 1px solid #ccb79a; border-radius: 8px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b;">
+                                    <option value="">Tipo</option>
+                                    <option value="*">*</option>
+                                    <option value="s/">s/</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Ordem</label>
+                            <input type="number" name="orgao_${orgaoNum}_ordem" value="${orgaoNum}" min="1" style="width: 100%; border: 1px solid #ccb79a; border-radius: 8px; background: #fffaf2; padding: 0.4rem; color: #4a3d2b;">
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 0.8rem;">
+                        <h5 style="margin: 0 0 0.6rem 0; color: #4a3d2b; font-size: 0.9rem;">Registações</h5>
+                        <div id="registacoes-${orgaoNum}" class="registacoes-list"></div>
+                        <button type="button" onclick="addRegistacao(${orgaoNum})" style="margin-top: 0.5rem; padding: 0.35rem 0.6rem; background: #b79f79; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">+ Registação</button>
+                    </div>
+                </div>
+            `;
+
+            container.insertAdjacentHTML('beforeend', orgaoHTML);
+            
+            // Se há dados do órgão (edição), preencher os campos
+            if (orgaoData) {
+                const selectInicioNota = document.querySelector(`select[name="orgao_${orgaoNum}_ext_inicio_nota"]`);
+                const selectInicioOitava = document.querySelector(`select[name="orgao_${orgaoNum}_ext_inicio_oitava"]`);
+                const selectInicioTipo = document.querySelector(`select[name="orgao_${orgaoNum}_ext_inicio_tipo"]`);
+                const selectFimNota = document.querySelector(`select[name="orgao_${orgaoNum}_ext_fim_nota"]`);
+                const selectFimOitava = document.querySelector(`select[name="orgao_${orgaoNum}_ext_fim_oitava"]`);
+                const selectFimTipo = document.querySelector(`select[name="orgao_${orgaoNum}_ext_fim_tipo"]`);
+                const inputOrdem = document.querySelector(`input[name="orgao_${orgaoNum}_ordem"]`);
+                
+                if (orgaoData.ext_inicio_nota_id) selectInicioNota.value = orgaoData.ext_inicio_nota_id;
+                if (orgaoData.ext_inicio_oitava !== "") selectInicioOitava.value = orgaoData.ext_inicio_oitava;
+                if (orgaoData.ext_inicio_tipo !== undefined) selectInicioTipo.value = orgaoData.ext_inicio_tipo;
+                if (orgaoData.ext_fim_nota_id) selectFimNota.value = orgaoData.ext_fim_nota_id;
+                if (orgaoData.ext_fim_oitava !== "") selectFimOitava.value = orgaoData.ext_fim_oitava;
+                if (orgaoData.ext_fim_tipo !== undefined) selectFimTipo.value = orgaoData.ext_fim_tipo;
+                if (orgaoData.ordem) inputOrdem.value = orgaoData.ordem;
+                
+                // Carregar registações existentes
+                if (orgaoData.registacoes && orgaoData.registacoes.length > 0) {
+                    orgaoData.registacoes.forEach(regData => {
+                        addRegistacao(orgaoNum, regData);
+                    });
+                }
+            }
+        }
+
+        function addRegistacao(orgaoNum, regData = null) {
+            const container = document.getElementById(`registacoes-${orgaoNum}`);
+            const regIdx = container.children.length + 1;
+            const regId = `orgao_${orgaoNum}_reg_${regIdx}`;
+
+            const registosOptions = registos.map(reg => 
+                `<option value="${reg.id}">${reg.nome}</option>`
+            ).join('');
+
+            const registacaoHTML = `
+                <div class="registacao-item" id="${regId}" style="background: #fffdf8; border: 1px solid #d7c8af; border-radius: 8px; padding: 0.8rem; margin-bottom: 0.6rem; display: grid; grid-template-columns: repeat(4, 1fr) 50px; gap: 0.5rem; align-items: flex-end;">
+                    <div>
+                        <label style="display: block; font-size: 0.75rem; font-weight: 600; color: #6c6458; margin-bottom: 0.25rem;">Geral</label>
+                        <select name="orgao_${orgaoNum}_reg_${regIdx}_geral" style="width: 100%; border: 1px solid #ccb79a; border-radius: 6px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b; font-size: 0.85rem;">
+                            <option value="">-</option>
+                            ${registosOptions}
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; font-size: 0.75rem; font-weight: 600; color: #6c6458; margin-bottom: 0.25rem;">Esquerda</label>
+                        <select name="orgao_${orgaoNum}_reg_${regIdx}_esquerda" style="width: 100%; border: 1px solid #ccb79a; border-radius: 6px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b; font-size: 0.85rem;">
+                            <option value="">-</option>
+                            ${registosOptions}
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; font-size: 0.75rem; font-weight: 600; color: #6c6458; margin-bottom: 0.25rem;">Direita</label>
+                        <select name="orgao_${orgaoNum}_reg_${regIdx}_direita" style="width: 100%; border: 1px solid #ccb79a; border-radius: 6px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b; font-size: 0.85rem;">
+                            <option value="">-</option>
+                            ${registosOptions}
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; font-size: 0.75rem; font-weight: 600; color: #6c6458; margin-bottom: 0.25rem;">Número</label>
+                        <input type="number" name="orgao_${orgaoNum}_reg_${regIdx}_numero" value="${regIdx}" min="1" style="width: 100%; border: 1px solid #ccb79a; border-radius: 6px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b; font-size: 0.85rem;">
+                    </div>
+                    <button type="button" onclick="removeRegistacao('${regId}')" style="background: #f1a7a6; color: white; border: none; padding: 0.35rem 0.4rem; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem;">✕</button>
+                </div>
+            `;
+
+            container.insertAdjacentHTML('beforeend', registacaoHTML);
+            
+            // Se há dados da registação (edição), preencher os campos
+            if (regData) {
+                const selectGeral = document.querySelector(`select[name="orgao_${orgaoNum}_reg_${regIdx}_geral"]`);
+                const selectEsquerda = document.querySelector(`select[name="orgao_${orgaoNum}_reg_${regIdx}_esquerda"]`);
+                const selectDireita = document.querySelector(`select[name="orgao_${orgaoNum}_reg_${regIdx}_direita"]`);
+                const inputNumero = document.querySelector(`input[name="orgao_${orgaoNum}_reg_${regIdx}_numero"]`);
+                
+                if (regData.geral_id) selectGeral.value = regData.geral_id;
+                if (regData.esquerda_id) selectEsquerda.value = regData.esquerda_id;
+                if (regData.direita_id) selectDireita.value = regData.direita_id;
+                if (regData.numero) inputNumero.value = regData.numero;
+            }
+        }
+
+        function removeOrgao(orgaoId) {
+            document.getElementById(orgaoId).remove();
+        }
+
+        function removeRegistacao(regId) {
+            document.getElementById(regId).remove();
+        }
+    </script>
+{% endblock %}

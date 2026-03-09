@@ -1,0 +1,27 @@
+{% extends "obras/layout.html" %}
+{% load obras_filters %}
+
+{% block title %}{{ compositor }}{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <h1>{{ compositor }}</h1>
+        <p class="subtitle">Obras associadas a este compositor.</p>
+    </section>
+
+    <section class="card">
+        {% if compositor.obras.all %}
+            <ul class="list">
+                {% for obra in compositor.obras.all %}
+                    <li class="item">
+                        <a href="{% url 'obra' obra.id %}">{{ obra.titulo }} - <span style="font-weight:normal; font-style:italic;">{{ obra.genero }}  ({{ obra.efectivo_orgao|format_orgaos }})</span></a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty">Nenhuma obra cadastrada para este compositor.</p>
+        {% endif %}
+    </section>
+
+    <a class="back" href="{% url 'compositores' %}">Voltar para compositores</a>
+{% endblock %}

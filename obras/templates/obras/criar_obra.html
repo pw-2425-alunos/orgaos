@@ -1,0 +1,319 @@
+{% extends "obras/layout.html" %}
+
+{% block title %}Criar Nova Obra{% endblock %}
+
+{% block content %}
+        <section class="hero">
+            <h1>Criar Nova Obra</h1>
+            <p class="subtitle">Preencha os dados da nova obra.</p>
+        </section>
+
+        <section class="card">
+            {% if error %}
+                <div style="background-color: #fef3f2; border: 1px solid #f1a7a6; border-radius: 10px; padding: 0.75rem; margin-bottom: 1rem; color: #ba3c3a;">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <form method="post" class="search-form">
+                {% csrf_token %}
+                
+                <div class="field-grid">
+                    <div class="field field-wide">
+                        <label for="titulo">Título *</label>
+                        <input id="titulo" type="text" name="titulo" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Compositor *</label>
+                        <div class="compositor-toggle" style="display: flex; gap: 0.6rem; margin-bottom: 0.35rem;">
+                            <button type="button" class="toggle-btn active" data-mode="select" style="flex: 1; padding: 0.4rem; border: 1px solid #ccb79a; background: #fffaf2; border-radius: 8px; cursor: pointer; font-weight: 600; color: #4a3d2b; transition: all 180ms ease;">Selecionar</button>
+                            <button type="button" class="toggle-btn" data-mode="create" style="flex: 1; padding: 0.4rem; border: 1px solid #d7c8af; background: transparent; border-radius: 8px; cursor: pointer; font-weight: 600; color: #8a673c; transition: all 180ms ease;">Criar novo</button>
+                        </div>
+                        
+                        <div id="compositor-select" class="compositor-mode" style="display: block;">
+                            <select id="compositor" name="compositor">
+                                <option value="">-</option>
+                                {% for comp in compositores %}
+                                    <option value="{{ comp.id }}">{{ comp }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <div id="compositor-create" class="compositor-mode" style="display: none;">
+                            <input id="new_compositor_apelido" type="text" name="new_compositor_apelido" placeholder="Apelido" style="width: 100%; margin-bottom: 0.35rem; border: 1px solid #ccb79a; border-radius: 10px; background: #fffaf2; padding: 0.55rem 0.62rem; color: #2e271d; font-family: 'Source Sans 3', sans-serif;">
+                            <input id="new_compositor_nome" type="text" name="new_compositor_nome" placeholder="Nome" style="width: 100%; border: 1px solid #ccb79a; border-radius: 10px; background: #fffaf2; padding: 0.55rem 0.62rem; color: #2e271d; font-family: 'Source Sans 3', sans-serif;">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="ano">Ano</label>
+                        <input id="ano" type="number" min="1500" max="2100" name="ano">
+                    </div>
+
+                    <div class="field">
+                        <label for="genero">Género</label>
+                        <select id="genero" name="genero">
+                            <option value="">-</option>
+                            {% for gen in generos %}
+                                <option value="{{ gen.id }}">{{ gen.nome }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="tonalidade">Tonalidade</label>
+                        <select id="tonalidade" name="tonalidade">
+                            <option value="">-</option>
+                            {% for ton in tonalidades %}
+                                <option value="{{ ton.id }}">{{ ton }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="field field-wide">
+                        <label for="efectivo_vocal">Efectivo Vocal</label>
+                        <input id="efectivo_vocal" type="text" name="efectivo_vocal" placeholder="Ex: S.A.T.B">
+                    </div>
+
+                    <div class="field field-wide">
+                        <label for="efectivo_orgao">Efectivo Orgão</label>
+                        <input id="efectivo_orgao" type="text" name="efectivo_orgao" placeholder="Ex: 2 órgãos">
+                    </div>
+
+                    <!-- Seção para caracterizar órgãos -->
+                    <div class="field field-wide" style="margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid #d7c8af;">
+                        <h3 style="margin: 0 0 0.8rem 0; font-size: 1rem; color: #4a3d2b;">Órgãos e Registações</h3>
+                        <p style="margin: 0 0 0.8rem 0; font-size: 0.85rem; color: #8a7069;">Defina as características de cada órgão e suas registações.</p>
+                        
+                        <div id="orgaos-container">
+                            <!-- Órgãos serão adicionados aqui via JavaScript -->
+                        </div>
+                        
+                        <button type="button" id="add-orgao-btn" style="margin-top: 0.8rem; padding: 0.5rem 0.8rem; background: #8a673c; color: #f9f2e6; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: filter 180ms ease;" onmouseover="this.style.filter='brightness(1.1)'" onmouseout="this.style.filter='brightness(1)'">+ Adicionar Órgão</button>
+                    </div>
+
+                    <div class="field field-wide">
+                        <label for="descricao_fisica">Descrição Física</label>
+                        <textarea id="descricao_fisica" name="descricao_fisica" rows="3"></textarea>
+                    </div>
+
+                    <div class="field field-wide">
+                        <label for="onomastica">Onomástica</label>
+                        <textarea id="onomastica" name="onomastica" rows="3"></textarea>
+                    </div>
+
+                    <div class="field field-wide">
+                        <label for="referencias">Referências</label>
+                        <textarea id="referencias" name="referencias" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div class="actions-row">
+                    <button type="submit" class="back">Criar obra</button>
+                    <a class="back back-secondary" href="{% url 'landing' %}">Cancelar</a>
+                </div>
+            </form>
+        </section>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script>
+        // Dados passados do Django
+        const notas = {{ notas_json|safe }};
+        const oitavas = {{ oitavas_json|safe }};
+        const registos = {{ registos_json|safe }};
+
+        let orgaoCounter = 0;
+
+        // Toggle between select and create compositor modes
+        document.querySelectorAll('.toggle-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const mode = btn.getAttribute('data-mode');
+                
+                // Update button states
+                document.querySelectorAll('.toggle-btn').forEach(b => {
+                    b.classList.remove('active');
+                    b.style.background = 'transparent';
+                    b.style.color = '#8a673c';
+                    b.style.borderColor = '#d7c8af';
+                });
+                btn.classList.add('active');
+                btn.style.background = '#fffaf2';
+                btn.style.color = '#4a3d2b';
+                btn.style.borderColor = '#ccb79a';
+                
+                // Toggle compositor modes
+                document.getElementById('compositor-select').style.display = mode === 'select' ? 'block' : 'none';
+                document.getElementById('compositor-create').style.display = mode === 'create' ? 'block' : 'none';
+                
+                // Clear fields when switching
+                if (mode === 'select') {
+                    document.getElementById('new_compositor_apelido').value = '';
+                    document.getElementById('new_compositor_nome').value = '';
+                    document.getElementById('compositor').removeAttribute('required');
+                } else {
+                    document.getElementById('compositor').value = '';
+                    document.getElementById('new_compositor_apelido').setAttribute('required', 'required');
+                    document.getElementById('new_compositor_nome').setAttribute('required', 'required');
+                }
+            });
+        });
+
+        // Órgãos management
+        document.getElementById('add-orgao-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            addOrgao();
+        });
+
+        function addOrgao() {
+            const container = document.getElementById('orgaos-container');
+            const orgaoNum = ++orgaoCounter;
+            const orgaoId = `orgao-${orgaoNum}`;
+
+            const notaOptions = notas.map(nota => 
+                `<option value="${nota.id}">${nota.nome}</option>`
+            ).join('');
+
+            const oitavaOptions = oitavas.map(oitava => 
+                `<option value="${oitava}">${oitava}</option>`
+            ).join('');
+
+            const registosOptions = registos.map(reg => 
+                `<option value="${reg.id}">${reg.nome}</option>`
+            ).join('');
+
+            const orgaoHTML = `
+                <div class="orgao-card" id="${orgaoId}" style="background: #fbf7f0; border: 1px solid #d7c8af; border-radius: 10px; padding: 1rem; margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+                        <h4 style="margin: 0; color: #4a3d2b;">Órgão ${orgaoNum}</h4>
+                        <button type="button" onclick="removeOrgao('${orgaoId}')" style="background: #f1a7a6; color: white; border: none; padding: 0.35rem 0.6rem; border-radius: 6px; cursor: pointer; font-weight: 600;">✕ Remover</button>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 0.8rem;">
+                        <div style="border: 1px solid #d7c8af; border-radius: 8px; padding: 0.6rem; background: #fffdf8;">
+                            <label style="display: block; font-weight: 600; color: #4a3d2b; margin-bottom: 0.5rem;">Extensão Início</label>
+                            <div style="display: grid; grid-template-columns: 1fr 80px 70px; gap: 0.4rem;">
+                                <div>
+                                    <label style="display: block; font-size: 0.75rem; font-weight: 600; color: #6c6458; margin-bottom: 0.25rem;">Nota</label>
+                                    <select name="orgao_${orgaoNum}_ext_inicio_nota" style="width: 100%; border: 1px solid #ccb79a; border-radius: 6px; background: #fffaf2; padding: 0.4rem; color: #4a3d2b;">
+                                        <option value="">-</option>
+                                        ${notaOptions}
+                                    </select>
+                                </div>
+                                <div>
+                                    <label style="display: block; font-size: 0.75rem; font-weight: 600; color: #6c6458; margin-bottom: 0.25rem;">Oitava</label>
+                                    <select name="orgao_${orgaoNum}_ext_inicio_oitava" style="width: 100%; border: 1px solid #ccb79a; border-radius: 6px; background: #fffaf2; padding: 0.4rem; color: #4a3d2b;">
+                                        <option value="">-</option>
+                                        ${oitavaOptions}
+                                    </select>
+                                </div>
+                                <div>
+                                    <label style="display: block; font-size: 0.75rem; font-weight: 600; color: #6c6458; margin-bottom: 0.25rem;">Tipo</label>
+                                    <select name="orgao_${orgaoNum}_ext_inicio_tipo" style="width: 100%; border: 1px solid #ccb79a; border-radius: 6px; background: #fffaf2; padding: 0.4rem; color: #4a3d2b;">
+                                        <option value=""></option>
+                                        <option value="*">*</option>
+                                        <option value="s/">s/</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="border: 1px solid #d7c8af; border-radius: 8px; padding: 0.6rem; background: #fffdf8;">
+                            <label style="display: block; font-weight: 600; color: #4a3d2b; margin-bottom: 0.5rem;">Extensão Fim</label>
+                            <div style="display: grid; grid-template-columns: 1fr 80px 70px; gap: 0.4rem;">
+                                <div>
+                                    <label style="display: block; font-size: 0.75rem; font-weight: 600; color: #6c6458; margin-bottom: 0.25rem;">Nota</label>
+                                    <select name="orgao_${orgaoNum}_ext_fim_nota" style="width: 100%; border: 1px solid #ccb79a; border-radius: 6px; background: #fffaf2; padding: 0.4rem; color: #4a3d2b;">
+                                        <option value="">-</option>
+                                        ${notaOptions}
+                                    </select>
+                                </div>
+                                <div>
+                                    <label style="display: block; font-size: 0.75rem; font-weight: 600; color: #6c6458; margin-bottom: 0.25rem;">Oitava</label>
+                                    <select name="orgao_${orgaoNum}_ext_fim_oitava" style="width: 100%; border: 1px solid #ccb79a; border-radius: 6px; background: #fffaf2; padding: 0.4rem; color: #4a3d2b;">
+                                        <option value="">-</option>
+                                        ${oitavaOptions}
+                                    </select>
+                                </div>
+                                <div>
+                                    <label style="display: block; font-size: 0.75rem; font-weight: 600; color: #6c6458; margin-bottom: 0.25rem;">Tipo</label>
+                                    <select name="orgao_${orgaoNum}_ext_fim_tipo" style="width: 100%; border: 1px solid #ccb79a; border-radius: 6px; background: #fffaf2; padding: 0.4rem; color: #4a3d2b;">
+                                        <option value=""></option>
+                                        <option value="*">*</option>
+                                        <option value="s/">s/</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 0.6rem;">
+                        <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #6c6458; margin-bottom: 0.25rem;">Ordem</label>
+                        <input type="number" name="orgao_${orgaoNum}_ordem" value="${orgaoNum}" min="1" style="width: 100px; border: 1px solid #ccb79a; border-radius: 8px; background: #fffaf2; padding: 0.4rem; color: #4a3d2b;">
+                    </div>
+
+                    <div style="margin-bottom: 0.8rem;">
+                        <h5 style="margin: 0 0 0.6rem 0; color: #4a3d2b; font-size: 0.9rem;">Registações</h5>
+                        <div id="registacoes-${orgaoNum}" class="registacoes-list"></div>
+                        <button type="button" onclick="addRegistacao(${orgaoNum})" style="margin-top: 0.5rem; padding: 0.35rem 0.6rem; background: #b79f79; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">+ Registação</button>
+                    </div>
+                </div>
+            `;
+
+            container.insertAdjacentHTML('beforeend', orgaoHTML);
+        }
+
+        function addRegistacao(orgaoNum) {
+            const container = document.getElementById(`registacoes-${orgaoNum}`);
+            const regIdx = container.children.length + 1;
+            const regId = `orgao_${orgaoNum}_reg_${regIdx}`;
+
+            const registosOptions = registos.map(reg => 
+                `<option value="${reg.id}">${reg.nome}</option>`
+            ).join('');
+
+            const registacaoHTML = `
+                <div class="registacao-item" id="${regId}" style="background: #fffdf8; border: 1px solid #d7c8af; border-radius: 8px; padding: 0.8rem; margin-bottom: 0.6rem; display: grid; grid-template-columns: repeat(4, 1fr) 50px; gap: 0.5rem; align-items: flex-end;">
+                    <div>
+                        <label style="display: block; font-size: 0.75rem; font-weight: 600; color: #6c6458; margin-bottom: 0.25rem;">Geral</label>
+                        <select name="orgao_${orgaoNum}_reg_${regIdx}_geral" style="width: 100%; border: 1px solid #ccb79a; border-radius: 6px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b; font-size: 0.85rem;">
+                            <option value="">-</option>
+                            ${registosOptions}
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; font-size: 0.75rem; font-weight: 600; color: #6c6458; margin-bottom: 0.25rem;">Esquerda</label>
+                        <select name="orgao_${orgaoNum}_reg_${regIdx}_esquerda" style="width: 100%; border: 1px solid #ccb79a; border-radius: 6px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b; font-size: 0.85rem;">
+                            <option value="">-</option>
+                            ${registosOptions}
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; font-size: 0.75rem; font-weight: 600; color: #6c6458; margin-bottom: 0.25rem;">Direita</label>
+                        <select name="orgao_${orgaoNum}_reg_${regIdx}_direita" style="width: 100%; border: 1px solid #ccb79a; border-radius: 6px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b; font-size: 0.85rem;">
+                            <option value="">-</option>
+                            ${registosOptions}
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; font-size: 0.75rem; font-weight: 600; color: #6c6458; margin-bottom: 0.25rem;">Número</label>
+                        <input type="number" name="orgao_${orgaoNum}_reg_${regIdx}_numero" value="${regIdx}" min="1" style="width: 100%; border: 1px solid #ccb79a; border-radius: 6px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b; font-size: 0.85rem;">
+                    </div>
+                    <button type="button" onclick="removeRegistacao('${regId}')" style="background: #f1a7a6; color: white; border: none; padding: 0.35rem 0.4rem; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem;">✕</button>
+                </div>
+            `;
+
+            container.insertAdjacentHTML('beforeend', registacaoHTML);
+        }
+
+        function removeOrgao(orgaoId) {
+            document.getElementById(orgaoId).remove();
+        }
+
+        function removeRegistacao(regId) {
+            document.getElementById(regId).remove();
+        }
+    </script>
+{% endblock %}

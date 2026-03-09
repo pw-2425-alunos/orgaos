@@ -1,0 +1,46 @@
+{% extends "obras/layout.html" %}
+
+{% block title %}Compositores{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <h1>Compositores</h1>
+        <p class="subtitle">Catálogo de compositores disponíveis.</p>
+    </section>
+
+    <section class="card">
+        <h2>Navegação Alfabética</h2>
+        <nav class="alphabet-nav" aria-label="Navegação por letra">
+            {% for item in alfabeto %}
+                {% if item.ativo %}
+                    <a class="alpha-link" href="#letra-{{ item.letra }}">{{ item.letra }}</a>
+                {% else %}
+                    <span class="alpha-link alpha-link-disabled">{{ item.letra }}</span>
+                {% endif %}
+            {% endfor %}
+        </nav>
+    </section>
+
+    <section class="card">
+        {% if grupos_compositores %}
+            <div class="composer-groups">
+                {% for grupo in grupos_compositores %}
+                    <section class="composer-group" id="letra-{{ grupo.letra }}">
+                        <h3 class="group-title">{{ grupo.letra }}</h3>
+                        <ul class="list">
+                            {% for compositor in grupo.itens %}
+                                <li class="item">
+                                    <a href="{% url 'compositor' compositor.id %}">{{ compositor }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </section>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="empty">Nenhum compositor cadastrado.</p>
+        {% endif %}
+    </section>
+
+    <a class="back" href="{% url 'landing' %}">Voltar para início</a>
+{% endblock %}

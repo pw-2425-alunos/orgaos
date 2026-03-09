@@ -1,0 +1,42 @@
+{% extends "obras/layout.html" %}
+
+{% block title %}Catalogação de Obras para Vários Órgãos{% endblock %}
+
+{% block content %}
+    <section class="hero landing-hero">
+        <p class="landing-kicker">Arquivo Musical</p>
+        <h1>Catalogação de Obras para Vários Órgãos</h1>
+        <p class="subtitle">Consulta organizada de compositores, obras, órgãos e registações em um único catálogo digital.</p>
+        <div class="landing-actions">
+            <a class="back" href="{% url 'compositores' %}">Explorar compositores</a>
+            <a class="back back-secondary" href="{% url 'pesquisa' %}">Pesquisar obras</a>
+            {% if user.is_authenticated %}
+                <a class="back" href="{% url 'criar_obra' %}">Criar nova obra</a>
+            {% endif %}
+        </div>
+    </section>
+
+    <section class="grid landing-grid">
+        <article class="card stat-card" style="animation-delay: 60ms;">
+            <h2>{{ total_compositores }}</h2>
+            <p class="subtitle">Compositores catalogados</p>
+        </article>
+        <article class="card stat-card" style="animation-delay: 120ms;">
+            <h2>{{ total_obras }}</h2>
+            <p class="subtitle">Obras registradas</p>
+        </article>
+        <article class="card stat-card" style="animation-delay: 180ms;">
+            <h2>{{ total_registacoes }}</h2>
+            <p class="subtitle">Registações indexadas</p>
+        </article>
+    </section>
+
+    <section class="card" style="animation-delay: 220ms;">
+        <h2>Fluxo de Consulta</h2>
+        <ul class="list">
+            <li class="item">Navegue por compositor com índice alfabético.</li>
+            <li class="item">Abra a obra e visualize metadados históricos e técnicos.</li>
+            <li class="item">Consulte os órgãos e as registações associadas.</li>
+        </ul>
+    </section>
+{% endblock %}

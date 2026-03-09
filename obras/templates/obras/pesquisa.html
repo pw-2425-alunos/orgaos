@@ -1,0 +1,106 @@
+{% extends "obras/layout.html" %}
+
+{% block title %}Pesquisa de Obras{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <h1>Pesquisa de Obras</h1>
+        <p class="subtitle">Filtre por compositor, género, ano, tonalidade, número de órgãos e registos.</p>
+    </section>
+
+    <section class="card">
+        <h2>Filtros</h2>
+        <form method="get" class="search-form">
+            <div class="field-grid">
+                <div class="field">
+                    <label for="compositor">Compositor</label>
+                    <select id="compositor" name="compositor" class="{% if filtros.compositor %}has-value{% endif %}">
+                        <option value="">Todos</option>
+                        {% for comp in compositores %}
+                            <option value="{{ comp.id }}"{% if filtros.compositor == comp.id|stringformat:"s" %} selected{% endif %}>{{ comp }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="genero">Género</label>
+                    <select id="genero" name="genero" class="{% if filtros.genero %}has-value{% endif %}">
+                        <option value="">Todos</option>
+                        {% for gen in generos %}
+                            <option value="{{ gen.id }}"{% if filtros.genero == gen.id|stringformat:"s" %} selected{% endif %}>{{ gen.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="tonalidade">Tonalidade</label>
+                    <select id="tonalidade" name="tonalidade" class="{% if filtros.tonalidade %}has-value{% endif %}">
+                        <option value="">Todas</option>
+                        {% for ton in tonalidades %}
+                            <option value="{{ ton.id }}"{% if filtros.tonalidade == ton.id|stringformat:"s" %} selected{% endif %}>{{ ton }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="ano_inicio">Ano (de)</label>
+                    <input id="ano_inicio" type="number" min="1500" max="2100" name="ano_inicio" value="{{ filtros.ano_inicio }}" placeholder="Ex: 1700" class="{% if filtros.ano_inicio %}has-value{% endif %}">
+                </div>
+
+                <div class="field">
+                    <label for="ano_fim">Ano (até)</label>
+                    <input id="ano_fim" type="number" min="1500" max="2100" name="ano_fim" value="{{ filtros.ano_fim }}" placeholder="Ex: 1800" class="{% if filtros.ano_fim %}has-value{% endif %}">
+                </div>
+
+                <div class="field">
+                    <label for="num_orgaos">Nº de órgãos</label>
+                    <input id="num_orgaos" type="number" min="1" name="num_orgaos" value="{{ filtros.num_orgaos }}" placeholder="Ex: 4" class="{% if filtros.num_orgaos %}has-value{% endif %}">
+                </div>
+
+                <div class="field field-wide">
+                    <label for="registos">Registos</label>
+                    <input id="registos" type="text" name="registos" value="{{ filtros.registos }}" placeholder="Ex: Clarins, Cheio, Trombetinha" class="{% if filtros.registos %}has-value{% endif %}">
+                </div>
+            </div>
+
+            <div class="actions-row">
+                <button type="submit" class="back">Pesquisar</button>
+                <a class="back back-secondary" href="{% url 'pesquisa' %}">Limpar</a>
+            </div>
+        </form>
+    </section>
+
+    <section class="card">
+        <h2>Resultados ({{ obras|length }})</h2>
+        {% if obras %}
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Obra</th>
+                            <th>Compositor</th>
+                            <th>Género</th>
+                            <th>Órgãos</th>
+                            <th>Registações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for obra in obras %}
+                            <tr>
+                                <td><a href="{% url 'obra' obra.id %}">{{ obra.titulo }}</a></td>
+                                <td>{{ obra.compositor }}</td>
+                                <td>{{ obra.genero|default:"-" }}</td>
+                                <td>{{ obra.num_orgaos }}</td>
+                                <td>{{ obra.num_registacoes }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="empty">Sem resultados para os filtros selecionados.</p>
+        {% endif %}
+    </section>
+
+    <a class="back" href="{% url 'landing' %}">Voltar para início</a>
+{% endblock %}
