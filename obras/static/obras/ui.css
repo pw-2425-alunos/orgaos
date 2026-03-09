@@ -105,6 +105,16 @@ h1,
     margin-top: 1rem;
 }
 
+@media (min-width: 1000px) {
+    .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.card-full {
+    grid-column: 1 / -1;
+}
+
 .card {
     margin-top: 1rem;
     background: var(--panel);

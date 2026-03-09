@@ -21,13 +21,12 @@
             <h2>Detalhes da Obra</h2>
             <div class="details">
                 <p><strong>Ano:</strong> {{ obra.ano|default:"-" }}</p>
-                <p><strong>Efectivo Vocal:</strong> {{ obra.efectivo_vocal|default:"-" }}</p>
-                <p><strong>Efectivo Orgão:</strong> {{ obra.efectivo_orgao|format_orgaos|default:"-" }}</p>
-                <p><strong>Tonalidade:</strong> {{ obra.tonalidade|default:"-" }}</p>
                 <p><strong>Género:</strong> {{ obra.genero|default:"-" }}</p>
+                <p><strong>Tonalidade:</strong> {{ obra.tonalidade|default:"-" }}</p>
+                <p><strong>Efectivo Vocal:</strong> {{ obra.efectivo_vocal|default:"-" }}</p>
+                <p><strong>Efectivo do Orgão:</strong> {{ obra.efectivo_orgao|format_orgaos|default:"-" }}</p>
                 <p><strong>Descrição física:</strong> {{ obra.descricao_fisica|default:"-" }}</p>
                 <p><strong>Onomástica:</strong> {{ obra.onomastica|default:"-" }}</p>
-                <p><strong>Referências:</strong> {{ obra.referencias|default:"-" }}</p>
             </div>
         </article>
 
@@ -59,7 +58,7 @@
             {% endif %}
         </article>
 
-        <article class="card" style="animation-delay: 200ms;">
+        <article class="card card-full" style="animation-delay: 200ms;">
             <h2>Registrações</h2>
             {% if obra.orgaos.all %}
                 <div class="table-wrap">
@@ -91,6 +90,11 @@
             {% else %}
                 <p class="empty">Nenhuma registração cadastrada para esta obra.</p>
             {% endif %}
+        </article>
+
+        <article class="card card-full" style="animation-delay: 270ms;">
+            <h2>Referências</h2>
+            <p>{{ obra.referencias|default:"Sem referências cadastradas." }}</p>
         </article>
     </section>
 {% endblock %}
