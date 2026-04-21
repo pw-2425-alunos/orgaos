@@ -4,13 +4,14 @@
 
 {% block content %}
     <section class="hero">
+        <div class="kicker">Acesso</div>
         <h1>Acesso Restrito</h1>
         <p class="subtitle">Faça login para editar ou criar obras.</p>
     </section>
 
-    <section class="card" style="max-width: 400px; margin: 1rem auto;">
+    <section class="card narrow-card">
         {% if error %}
-            <div style="background-color: #fef3f2; border: 1px solid #f1a7a6; border-radius: 10px; padding: 0.75rem; margin-bottom: 1rem; color: #ba3c3a;">
+            <div class="message-error">
                 {{ error }}
             </div>
         {% endif %}
@@ -37,5 +38,5 @@
         </form>
     </section>
 
-    <a class="back" href="{% url 'landing' %}">Voltar para início</a>
+    <a class="back" href="{% url 'landing' %}">Voltar para Início</a>
 {% endblock %}

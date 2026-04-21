@@ -4,6 +4,7 @@
 
 {% block content %}
         <section class="hero">
+            <div class="kicker">Edição</div>
             <h1>Editar Obra</h1>
             <p class="subtitle">{{ obra.titulo }}</p>
         </section>
@@ -78,11 +79,11 @@
                     </div>
 
                     <!-- Órgãos e Registações -->
-                    <div class="field field-wide" style="border-top: 2px solid #d7c8af; padding-top: 1rem; margin-top: 1rem;">
-                        <h3 style="color: #4a3d2b; margin: 0 0 0.5rem 0; font-size: 1.1rem;">Órgãos e Registações</h3>
-                        <p style="margin: 0 0 1rem 0; color: #868070; font-size: 0.9rem;">Defina as características de cada órgão e suas registações. Especifique a extensão e os registos de cada teclado.</p>
+                    <div class="field field-wide section-divider">
+                        <h3 class="section-subtitle">Órgãos e Registações</h3>
+                        <p class="section-note">Defina as características de cada órgão e as respetivas registações. Especifique a extensão e os registos de cada teclado.</p>
                         <div id="orgaos-container"></div>
-                        <button type="button" id="add-orgao-btn" style="padding: 0.5rem 1rem; background: #8a673c; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; margin-top: 0.5rem;">+ Adicionar Órgão</button>
+                        <button type="button" id="add-orgao-btn" style="padding: 0.5rem 1rem; background: #8a673c; color: white; border: none; border-radius: 0; cursor: pointer; font-weight: 600; margin-top: 0.5rem;">+ Adicionar Órgão</button>
                     </div>
                 </div>
 
@@ -130,43 +131,43 @@
             ).join('');
 
             const orgaoHTML = `
-                <div class="orgao-card" id="${orgaoId}" style="background: #fbf7f0; border: 1px solid #d7c8af; border-radius: 10px; padding: 1rem; margin-bottom: 1rem;">
+                <div class="orgao-card" id="${orgaoId}" style="background: #fbf7f0; border: 1px solid #d7c8af; border-radius: 0; padding: 1rem; margin-bottom: 1rem;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
                         <h4 style="margin: 0; color: #4a3d2b;">Órgão ${orgaoNum}</h4>
-                        <button type="button" onclick="removeOrgao('${orgaoId}')" style="background: #f1a7a6; color: white; border: none; padding: 0.35rem 0.6rem; border-radius: 6px; cursor: pointer; font-weight: 600;">✕ Remover</button>
+                        <button type="button" onclick="removeOrgao('${orgaoId}')" style="background: #f1a7a6; color: white; border: none; padding: 0.35rem 0.6rem; border-radius: 0; cursor: pointer; font-weight: 600;">✕ Remover</button>
                     </div>
 
                     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-bottom: 0.8rem;">
-                        <div class="field" style="border: 1px solid #e5d7bf; border-radius: 8px; padding: 0.5rem;">
+                        <div class="field" style="border: 1px solid #e5d7bf; border-radius: 0; padding: 0.5rem;">
                             <label style="font-size: 0.82rem;">Extensão Início</label>
                             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.4rem;">
-                                <select name="orgao_${orgaoNum}_ext_inicio_nota" style="width: 100%; border: 1px solid #ccb79a; border-radius: 8px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b;">
+                                <select name="orgao_${orgaoNum}_ext_inicio_nota" style="width: 100%; border: 1px solid #ccb79a; border-radius: 0; background: #fffaf2; padding: 0.35rem; color: #4a3d2b;">
                                     <option value="">Nota</option>
                                     ${notaOptions}
                                 </select>
-                                <select name="orgao_${orgaoNum}_ext_inicio_oitava" style="width: 100%; border: 1px solid #ccb79a; border-radius: 8px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b;">
+                                <select name="orgao_${orgaoNum}_ext_inicio_oitava" style="width: 100%; border: 1px solid #ccb79a; border-radius: 0; background: #fffaf2; padding: 0.35rem; color: #4a3d2b;">
                                     <option value="">Oit.</option>
                                     ${oitavaOptions}
                                 </select>
-                                <select name="orgao_${orgaoNum}_ext_inicio_tipo" style="width: 100%; border: 1px solid #ccb79a; border-radius: 8px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b;">
+                                <select name="orgao_${orgaoNum}_ext_inicio_tipo" style="width: 100%; border: 1px solid #ccb79a; border-radius: 0; background: #fffaf2; padding: 0.35rem; color: #4a3d2b;">
                                     <option value="">Tipo</option>
                                     <option value="*">*</option>
                                     <option value="s/">s/</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="field" style="border: 1px solid #e5d7bf; border-radius: 8px; padding: 0.5rem;">
+                        <div class="field" style="border: 1px solid #e5d7bf; border-radius: 0; padding: 0.5rem;">
                             <label style="font-size: 0.82rem;">Extensão Fim</label>
                             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.4rem;">
-                                <select name="orgao_${orgaoNum}_ext_fim_nota" style="width: 100%; border: 1px solid #ccb79a; border-radius: 8px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b;">
+                                <select name="orgao_${orgaoNum}_ext_fim_nota" style="width: 100%; border: 1px solid #ccb79a; border-radius: 0; background: #fffaf2; padding: 0.35rem; color: #4a3d2b;">
                                     <option value="">Nota</option>
                                     ${notaOptions}
                                 </select>
-                                <select name="orgao_${orgaoNum}_ext_fim_oitava" style="width: 100%; border: 1px solid #ccb79a; border-radius: 8px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b;">
+                                <select name="orgao_${orgaoNum}_ext_fim_oitava" style="width: 100%; border: 1px solid #ccb79a; border-radius: 0; background: #fffaf2; padding: 0.35rem; color: #4a3d2b;">
                                     <option value="">Oit.</option>
                                     ${oitavaOptions}
                                 </select>
-                                <select name="orgao_${orgaoNum}_ext_fim_tipo" style="width: 100%; border: 1px solid #ccb79a; border-radius: 8px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b;">
+                                <select name="orgao_${orgaoNum}_ext_fim_tipo" style="width: 100%; border: 1px solid #ccb79a; border-radius: 0; background: #fffaf2; padding: 0.35rem; color: #4a3d2b;">
                                     <option value="">Tipo</option>
                                     <option value="*">*</option>
                                     <option value="s/">s/</option>
@@ -175,14 +176,14 @@
                         </div>
                         <div class="field">
                             <label>Ordem</label>
-                            <input type="number" name="orgao_${orgaoNum}_ordem" value="${orgaoNum}" min="1" style="width: 100%; border: 1px solid #ccb79a; border-radius: 8px; background: #fffaf2; padding: 0.4rem; color: #4a3d2b;">
+                            <input type="number" name="orgao_${orgaoNum}_ordem" value="${orgaoNum}" min="1" style="width: 100%; border: 1px solid #ccb79a; border-radius: 0; background: #fffaf2; padding: 0.4rem; color: #4a3d2b;">
                         </div>
                     </div>
 
                     <div style="margin-bottom: 0.8rem;">
                         <h5 style="margin: 0 0 0.6rem 0; color: #4a3d2b; font-size: 0.9rem;">Registações</h5>
                         <div id="registacoes-${orgaoNum}" class="registacoes-list"></div>
-                        <button type="button" onclick="addRegistacao(${orgaoNum})" style="margin-top: 0.5rem; padding: 0.35rem 0.6rem; background: #b79f79; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">+ Registação</button>
+                        <button type="button" onclick="addRegistacao(${orgaoNum})" style="margin-top: 0.5rem; padding: 0.35rem 0.6rem; background: #b79f79; color: white; border: none; border-radius: 0; cursor: pointer; font-weight: 600;">+ Registação</button>
                     </div>
                 </div>
             `;
@@ -226,33 +227,33 @@
             ).join('');
 
             const registacaoHTML = `
-                <div class="registacao-item" id="${regId}" style="background: #fffdf8; border: 1px solid #d7c8af; border-radius: 8px; padding: 0.8rem; margin-bottom: 0.6rem; display: grid; grid-template-columns: repeat(4, 1fr) 50px; gap: 0.5rem; align-items: flex-end;">
+                <div class="registacao-item" id="${regId}" style="background: #fffdf8; border: 1px solid #d7c8af; border-radius: 0; padding: 0.8rem; margin-bottom: 0.6rem; display: grid; grid-template-columns: repeat(4, 1fr) 50px; gap: 0.5rem; align-items: flex-end;">
                     <div>
                         <label style="display: block; font-size: 0.75rem; font-weight: 600; color: #6c6458; margin-bottom: 0.25rem;">Geral</label>
-                        <select name="orgao_${orgaoNum}_reg_${regIdx}_geral" style="width: 100%; border: 1px solid #ccb79a; border-radius: 6px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b; font-size: 0.85rem;">
+                        <select name="orgao_${orgaoNum}_reg_${regIdx}_geral" style="width: 100%; border: 1px solid #ccb79a; border-radius: 0; background: #fffaf2; padding: 0.35rem; color: #4a3d2b; font-size: 0.85rem;">
                             <option value="">-</option>
                             ${registosOptions}
                         </select>
                     </div>
                     <div>
                         <label style="display: block; font-size: 0.75rem; font-weight: 600; color: #6c6458; margin-bottom: 0.25rem;">Esquerda</label>
-                        <select name="orgao_${orgaoNum}_reg_${regIdx}_esquerda" style="width: 100%; border: 1px solid #ccb79a; border-radius: 6px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b; font-size: 0.85rem;">
+                        <select name="orgao_${orgaoNum}_reg_${regIdx}_esquerda" style="width: 100%; border: 1px solid #ccb79a; border-radius: 0; background: #fffaf2; padding: 0.35rem; color: #4a3d2b; font-size: 0.85rem;">
                             <option value="">-</option>
                             ${registosOptions}
                         </select>
                     </div>
                     <div>
                         <label style="display: block; font-size: 0.75rem; font-weight: 600; color: #6c6458; margin-bottom: 0.25rem;">Direita</label>
-                        <select name="orgao_${orgaoNum}_reg_${regIdx}_direita" style="width: 100%; border: 1px solid #ccb79a; border-radius: 6px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b; font-size: 0.85rem;">
+                        <select name="orgao_${orgaoNum}_reg_${regIdx}_direita" style="width: 100%; border: 1px solid #ccb79a; border-radius: 0; background: #fffaf2; padding: 0.35rem; color: #4a3d2b; font-size: 0.85rem;">
                             <option value="">-</option>
                             ${registosOptions}
                         </select>
                     </div>
                     <div>
                         <label style="display: block; font-size: 0.75rem; font-weight: 600; color: #6c6458; margin-bottom: 0.25rem;">Número</label>
-                        <input type="number" name="orgao_${orgaoNum}_reg_${regIdx}_numero" value="${regIdx}" min="1" style="width: 100%; border: 1px solid #ccb79a; border-radius: 6px; background: #fffaf2; padding: 0.35rem; color: #4a3d2b; font-size: 0.85rem;">
+                        <input type="number" name="orgao_${orgaoNum}_reg_${regIdx}_numero" value="${regIdx}" min="1" style="width: 100%; border: 1px solid #ccb79a; border-radius: 0; background: #fffaf2; padding: 0.35rem; color: #4a3d2b; font-size: 0.85rem;">
                     </div>
-                    <button type="button" onclick="removeRegistacao('${regId}')" style="background: #f1a7a6; color: white; border: none; padding: 0.35rem 0.4rem; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem;">✕</button>
+                    <button type="button" onclick="removeRegistacao('${regId}')" style="background: #f1a7a6; color: white; border: none; padding: 0.35rem 0.4rem; border-radius: 0; cursor: pointer; font-weight: 600; font-size: 0.85rem;">✕</button>
                 </div>
             `;
 

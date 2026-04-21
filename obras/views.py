@@ -82,6 +82,7 @@ def compositores_view(request):
 
 
 def pesquisa_view(request):
+    titulo = request.GET.get("titulo", "").strip()
     compositor_id = request.GET.get("compositor", "").strip()
     genero_id = request.GET.get("genero", "").strip()
     num_orgaos = request.GET.get("num_orgaos", "").strip()
@@ -98,6 +99,9 @@ def pesquisa_view(request):
         )
         .order_by("titulo")
     )
+
+    if titulo:
+        obras = obras.filter(titulo__icontains=titulo)
 
     if compositor_id:
         obras = obras.filter(compositor_id=compositor_id)
@@ -170,6 +174,7 @@ def pesquisa_view(request):
         "tonalidades": tonalidades,
         "obras": obras,
         "filtros": {
+            "titulo": titulo,
             "compositor": compositor_id,
             "genero": genero_id,
             "num_orgaos": num_orgaos,

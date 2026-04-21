@@ -57,8 +57,13 @@ class Obra(models.Model):
 class Extensao(models.Model):
     nota = models.ForeignKey(Nota, on_delete=models.CASCADE, related_name="extensoes")
     oitava = models.IntegerField()
-    tipo = models.CharField(max_length=2,default="")
-    
+    tipo = models.CharField(max_length=2, default="")
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=["nota", "oitava", "tipo"], name="unique_extensao")
+        ]
+
     def __str__(self):
         return f"{self.nota}{self.oitava}{self.tipo}"
     

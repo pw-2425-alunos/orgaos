@@ -1,17 +1,22 @@
 {% extends "obras/layout.html" %}
 
-{% block title %}Pesquisa de Obras{% endblock %}
+{% block title %}Catálogo{% endblock %}
 
 {% block content %}
     <section class="hero">
-        <h1>Pesquisa de Obras</h1>
-        <p class="subtitle">Filtre por compositor, género, ano, tonalidade, número de órgãos e registos.</p>
+        <div class="kicker">Catálogo</div>
+        <h1>Catálogo</h1>
+        <p class="subtitle">Filtre por título, compositor, género, tonalidade, ano, número de órgãos e registos.</p>
     </section>
 
-    <section class="card">
-        <h2>Filtros</h2>
+    <section class="card catalog-card">
         <form method="get" class="search-form">
             <div class="field-grid">
+                <div class="field field-wide">
+                    <label for="titulo">Título da obra</label>
+                    <input id="titulo" type="text" name="titulo" value="{{ filtros.titulo }}" placeholder="Ex: Magnificat" class="{% if filtros.titulo %}has-value{% endif %}">
+                </div>
+
                 <div class="field">
                     <label for="compositor">Compositor</label>
                     <select id="compositor" name="compositor" class="{% if filtros.compositor %}has-value{% endif %}">
@@ -64,20 +69,19 @@
             </div>
 
             <div class="actions-row">
-                <button type="submit" class="back">Pesquisar</button>
+                <button type="submit" class="back">Filtrar catálogo</button>
                 <a class="back back-secondary" href="{% url 'pesquisa' %}">Limpar</a>
             </div>
         </form>
-    </section>
 
-    <section class="card">
-        <h2>Resultados ({{ obras|length }})</h2>
+        <p class="results-meta">{{ obras|length }} obra{{ obras|length|pluralize }} encontrada{{ obras|length|pluralize }} com os filtros atuais.</p>
+
         {% if obras %}
             <div class="table-wrap">
                 <table>
                     <thead>
                         <tr>
-                            <th>Obra</th>
+                            <th>Título</th>
                             <th>Compositor</th>
                             <th>Género</th>
                             <th>Órgãos</th>
@@ -87,7 +91,9 @@
                     <tbody>
                         {% for obra in obras %}
                             <tr>
-                                <td><a href="{% url 'obra' obra.id %}">{{ obra.titulo }}</a></td>
+                                <td>
+                                    <a class="result-link" href="{% url 'obra' obra.id %}">{{ obra.titulo }}</a>
+                                </td>
                                 <td>{{ obra.compositor }}</td>
                                 <td>{{ obra.genero|default:"-" }}</td>
                                 <td>{{ obra.num_orgaos }}</td>
@@ -102,5 +108,5 @@
         {% endif %}
     </section>
 
-    <a class="back" href="{% url 'landing' %}">Voltar para início</a>
+    <a class="back" href="{% url 'landing' %}">Voltar para Início</a>
 {% endblock %}

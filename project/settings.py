@@ -31,10 +31,12 @@ ALLOWED_HOSTS = [
     'orgaos.pw.deisi.ulusofona.pt',
     '127.0.0.1',
     'localhost',
+    'obmdatabase.pt',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://orgaos.pw.deisi.ulusofona.pt',
+    'https://obmdatabase.pt',
 ]
 
 
@@ -128,7 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = '/home/obmdatab/public_html/staticfiles' # BASE_DIR / 'staticfiles'
 
 # Include project-level static dir only if it exists to avoid W004 warnings.
 PROJECT_STATIC_DIR = BASE_DIR / 'static'

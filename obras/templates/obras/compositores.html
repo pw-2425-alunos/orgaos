@@ -4,12 +4,13 @@
 
 {% block content %}
     <section class="hero">
+        <div class="kicker">Compositores</div>
         <h1>Compositores</h1>
-        <p class="subtitle">Catálogo de compositores disponíveis.</p>
+        <p class="subtitle">Percurso alfabético pelos compositores catalogados.</p>
     </section>
 
     <section class="card">
-        <h2>Navegação Alfabética</h2>
+        <div class="kicker">Navegação</div>
         <nav class="alphabet-nav" aria-label="Navegação por letra">
             {% for item in alfabeto %}
                 {% if item.ativo %}
@@ -23,6 +24,7 @@
 
     <section class="card">
         {% if grupos_compositores %}
+            <p class="results-meta">{{ compositores|length }} compositor{{ compositores|length|pluralize }} disponível{{ compositores|length|pluralize }}.</p>
             <div class="composer-groups">
                 {% for grupo in grupos_compositores %}
                     <section class="composer-group" id="letra-{{ grupo.letra }}">
@@ -42,5 +44,5 @@
         {% endif %}
     </section>
 
-    <a class="back" href="{% url 'landing' %}">Voltar para início</a>
+    <a class="back" href="{% url 'landing' %}">Voltar para Início</a>
 {% endblock %}

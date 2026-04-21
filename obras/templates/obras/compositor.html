@@ -5,16 +5,21 @@
 
 {% block content %}
     <section class="hero">
+        <div class="kicker">Compositor</div>
         <h1>{{ compositor }}</h1>
         <p class="subtitle">Obras associadas a este compositor.</p>
     </section>
 
     <section class="card">
         {% if compositor.obras.all %}
+            <p class="results-meta">{{ compositor.obras.all|length }} obra{{ compositor.obras.all|length|pluralize }} associada{{ compositor.obras.all|length|pluralize }}.</p>
             <ul class="list">
                 {% for obra in compositor.obras.all %}
                     <li class="item">
-                        <a href="{% url 'obra' obra.id %}">{{ obra.titulo }} - <span style="font-weight:normal; font-style:italic;">{{ obra.genero }}  ({{ obra.efectivo_orgao|format_orgaos }})</span></a>
+                        <a href="{% url 'obra' obra.id %}">
+                            {{ obra.titulo }}
+                            <span class="composer-inline-meta">{{ obra.genero|default:"Sem género" }}{% if obra.efectivo_orgao %} ({{ obra.efectivo_orgao|format_orgaos }}){% endif %}</span>
+                        </a>
                     </li>
                 {% endfor %}
             </ul>
