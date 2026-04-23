@@ -81,6 +81,7 @@
                 <table>
                     <thead>
                         <tr>
+                            <th>Código</th>
                             <th>Título</th>
                             <th>Compositor</th>
                             <th>Género</th>
@@ -90,11 +91,10 @@
                     </thead>
                     <tbody>
                         {% for obra in obras %}
-                            <tr>
-                                <td>
-                                    <a class="result-link" href="{% url 'obra' obra.id %}">{{ obra.titulo }}</a>
-                                </td>
-                                <td>{{ obra.compositor }}</td>
+                            <tr onclick="window.location='{% url 'obra' obra.id %}'" style="cursor: pointer;">
+                                <td style="font-family: 'Courier New', monospace;">{{ obra.codigo }}</td>
+                                <td style="font-weight:bold;">{{ obra.titulo }}</td>
+                                <td>{{ obra.compositor.nome }} {{ obra.compositor.apelido }}</td>
                                 <td>{{ obra.genero|default:"-" }}</td>
                                 <td>{{ obra.num_orgaos }}</td>
                                 <td>{{ obra.num_registacoes }}</td>

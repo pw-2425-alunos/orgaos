@@ -13,4 +13,5 @@ urlpatterns = [
     path('compositores/<int:id>', views.compositor_view, name="compositor"),
     path('obras/<int:id>', views.obra_view, name="obra"),
     path('obras/<int:id>/editar', views.editar_obra_view, name="editar_obra"),
+    path('sobre/', views.sobre_view, name="sobre"),
 ]

@@ -97,7 +97,7 @@ def pesquisa_view(request):
             num_orgaos=Count("orgaos", distinct=True),
             num_registacoes=Count("orgaos__registacoes", distinct=True),
         )
-        .order_by("titulo")
+        .order_by("codigo")
     )
 
     if titulo:
@@ -586,3 +586,7 @@ def criar_obra_view(request):
         "registos_json": json.dumps(registos_list),
     }
     return render(request, "obras/criar_obra.html", context)
+
+
+def sobre_view(request):
+    return render(request, "obras/sobre.html")

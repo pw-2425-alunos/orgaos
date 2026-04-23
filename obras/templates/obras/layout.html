@@ -35,7 +35,7 @@
             position: relative;
         }
 
-        body::before {
+        /* body::before {
             content: "";
             position: fixed;
             inset: 0;
@@ -49,7 +49,7 @@
             inset: 0;
             background: rgba(255, 255, 255, 0.05);
             z-index: -1;
-        }
+        } */
 
         .page-title {
             width: 100%;
@@ -215,17 +215,19 @@
 </head>
 <body>
     <header class="page-title">
-        <h1>Catálogo das Obras Históricas para os Órgãos da Basílica de Mafra</h1>
-        <p>Base de dados</p>
+        <h1>Catálogo das Obras Históricas</h1>
+        <p>Órgãos da Basílica de Mafra</p>
         <nav class="nav">
             <a href="{% url 'landing' %}"{% if request.resolver_match.url_name == 'landing' %} class="is-active"{% endif %}>Início</a>
-            <a href="{% url 'compositores' %}"{% if request.resolver_match.url_name == 'compositores' or request.resolver_match.url_name == 'compositor' %} class="is-active"{% endif %}>Compositores</a>
             <a href="{% url 'pesquisa' %}"{% if request.resolver_match.url_name == 'pesquisa' %} class="is-active"{% endif %}>Catálogo</a>
+            <a href="{% url 'compositores' %}"{% if request.resolver_match.url_name == 'compositores' or request.resolver_match.url_name == 'compositor' %} class="is-active"{% endif %}>Compositores</a>
+            <a href="{% url 'sobre' %}"{% if request.resolver_match.url_name == 'sobre' %} class="is-active"{% endif %}>Sobre</a>
+            
             {% if user.is_authenticated %}
-                <span class="user-badge" style="padding-left:8px; padding-right:8px;">{{ user.username }}</span>
-                <a href="{% url 'logout' %}">Sair</a>
+                <span class="user-badge" style="padding-left:8px; padding-right:8px; margin-left:auto;">{{ user.username }}</span>
+                <a href="{% url 'logout' %}">Logout</a>
             {% else %}
-                <a href="{% url 'login' %}">Entrar</a>
+                <a href="{% url 'login' %}" style="margin-left:auto;">Login</a>
             {% endif %}
         </nav>
     </header>
