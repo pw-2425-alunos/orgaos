@@ -163,7 +163,7 @@ h1,
     margin: 0;
     padding: 0.46rem 0.56rem;
     border-left: 3px solid rgba(139, 46, 46, 0.22);
-    background: rgba(255, 255, 255, 0.34);
+    /* background: rgba(255, 255, 255, 0.34); */
     border-radius: 0;
     color: #302a20;
 }
@@ -263,7 +263,6 @@ h1,
 table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 680px;
     background: transparent;
 }
 
@@ -605,7 +604,8 @@ tbody tr:hover {
     }
 
     table {
-        min-width: 580px;
+        width: 100%;
+        border-collapse: collapse;
     }
 
     .field-grid {

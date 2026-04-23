@@ -19,21 +19,21 @@
 
     <section class="grid">
         <article class="card" style="animation-delay: 60ms;">
-            <div class="kicker">Informações</div>
+            <!-- <div class="kicker">Informações</div> -->
             <h2>Detalhes da Obra</h2>
             <div class="details">
-                <p><strong>Ano:</strong> {{ obra.ano|default:"-" }}</p>
-                <p><strong>Género:</strong> {{ obra.genero|default:"-" }}</p>
-                <p><strong>Tonalidade:</strong> {{ obra.tonalidade|default:"-" }}</p>
-                <p><strong>Efectivo Vocal:</strong> {{ obra.efectivo_vocal|default:"-" }}</p>
-                <p><strong>Efectivo do Orgão:</strong> {{ obra.efectivo_orgao|format_orgaos|default:"-" }}</p>
-                <p><strong>Descrição física:</strong> {{ obra.descricao_fisica|default:"-" }}</p>
-                <p><strong>Onomástica:</strong> {{ obra.onomastica|default:"-" }}</p>
+                <p><strong>Ano</strong> {{ obra.ano|default:"-" }}</p>
+                <p><strong>Género</strong> {{ obra.genero|default:"-" }}</p>
+                <p><strong>Tonalidade</strong> {{ obra.tonalidade|default:"-" }}</p>
+                <p><strong>Efectivo Vocal</strong> {{ obra.efectivo_vocal|default:"-" }}</p>
+                <p><strong>Efectivo do Orgão</strong> {{ obra.efectivo_orgao|format_orgaos|default:"-" }}</p>
+                <p><strong>Descrição física</strong> {{ obra.descricao_fisica|default:"-" }}</p>
+                <p><strong>Onomástica</strong> {{ obra.onomastica|default:"-" }}</p>
             </div>
         </article>
 
         <article class="card" style="animation-delay: 130ms;">
-            <div class="kicker">Órgãos</div>
+            <!-- <div class="kicker">Órgãos</div> -->
             <h2>Órgãos</h2>
             {% if obra.orgaos.all %}
                 <div class="table-wrap">
@@ -62,7 +62,7 @@
         </article>
 
         <article class="card card-full" style="animation-delay: 200ms;">
-            <div class="kicker">Registações</div>
+            <!-- <div class="kicker">Registações</div> -->
             <h2>Registações</h2>
             {% if obra.orgaos.all %}
                 <div class="table-wrap">
@@ -97,7 +97,7 @@
         </article>
 
         <article class="card card-full" style="animation-delay: 270ms;">
-            <div class="kicker">Referências</div>
+            <!-- <div class="kicker">Referências</div> -->
             <h2>Referências</h2>
             <p class="text-paragraph">{{ obra.referencias|default:"Sem referências cadastradas." }}</p>
         </article>
