@@ -1,4 +1,5 @@
 django
+django-environ
 Pillow
 python-decouple
 django_extensions

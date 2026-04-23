@@ -12,10 +12,14 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# importa .env
+env = environ.Env()
+environ.Env.read_env(BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -25,7 +29,7 @@ SECRET_KEY = 'django-insecure-a2ia*huc(x0^ig6tsebbjo7gr&c6y#brj-g-6w=m8ag34nwgc8
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # Use DEBUG=True only in local development environments.
-DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
+DEBUG = env.bool("DEBUG", default=False)
 
 ALLOWED_HOSTS = [
     'orgaos.pw.deisi.ulusofona.pt',
@@ -130,7 +134,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/home/obmdatab/public_html/staticfiles' # BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.getenv(
+    "STATIC_ROOT",
+     str(BASE_DIR / "staticfiles")
+)
 
 # Include project-level static dir only if it exists to avoid W004 warnings.
 PROJECT_STATIC_DIR = BASE_DIR / 'static'

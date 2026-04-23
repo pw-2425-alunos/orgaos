@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Case, When, Value, IntegerField
 
 class Compositor(models.Model):
     nome = models.CharField(max_length=100)
@@ -48,11 +49,12 @@ class Obra(models.Model):
     descricao_fisica = models.TextField(blank=True)
     onomastica = models.TextField(blank=True)
     referencias = models.TextField(blank=True)
+    codigo = models.CharField(max_length=50, blank=True, default="")
 
     def __str__(self):
         return f"{self.titulo} ({self.compositor})"
-    
 
+   
 
 class Extensao(models.Model):
     nota = models.ForeignKey(Nota, on_delete=models.CASCADE, related_name="extensoes")
