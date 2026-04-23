@@ -4,7 +4,7 @@
 
 {% block content %}
     <section class="hero">
-        <div class="kicker">Compositores</div>
+        <!-- <div class="kicker">Compositores</div> -->
         <h1>Compositores</h1>
         <p class="subtitle">Percurso alfabético pelos compositores catalogados.</p>
     </section>
@@ -24,7 +24,7 @@
 
     <section class="card">
         {% if grupos_compositores %}
-            <p class="results-meta">{{ compositores|length }} compositor{{ compositores|length|pluralize }} disponível{{ compositores|length|pluralize }}.</p>
+            <p class="results-meta">{{ compositores|length }} compositores</p>
             <div class="composer-groups">
                 {% for grupo in grupos_compositores %}
                     <section class="composer-group" id="letra-{{ grupo.letra }}">
