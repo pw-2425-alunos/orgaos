@@ -41,16 +41,15 @@
                         <thead>
                             <tr>
                                 <th>Órgão</th>
-                                <th>Extensão início</th>
-                                <th>Extensão fim</th>
+                                <th>Extensão </th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for orgao in obra.orgaos.all %}
                                 <tr>
                                     <td>{{ orgao.nome }}</td>
-                                    <td>{{ orgao.extensao_inicio.nota }} {{ orgao.extensao_inicio.oitava }} {{ orgao.extensao_inicio.tipo }}</td>
-                                    <td>{{ orgao.extensao_fim.nota }} {{ orgao.extensao_fim.oitava }} {{ orgao.extensao_fim.tipo }}</td>
+                                    <td>{{ orgao.extensao_inicio.nota }} {{ orgao.extensao_inicio.oitava }} {{ orgao.extensao_inicio.tipo }}
+                                    - {{ orgao.extensao_fim.nota }} {{ orgao.extensao_fim.oitava }} {{ orgao.extensao_fim.tipo }}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -61,7 +60,7 @@
             {% endif %}
         </article>
 
-        <article class="card card-full" style="animation-delay: 200ms;">
+        <!-- <article class="card card-full" style="animation-delay: 200ms;">
             <!-- <div class="kicker">Registações</div> -->
             <h2>Registações</h2>
             {% if obra.orgaos.all %}
@@ -70,10 +69,10 @@
                         <thead>
                             <tr>
                                 <th>Órgão</th>
-                                <th>Esquerda</th>
-                                <th>Direita</th>
+                                <th>M.Esq.</th>
+                                <th>M.Dta.</th>
                                 <th>Geral</th>
-                                <th>Número</th>
+                                <th>Nº</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -94,7 +93,7 @@
             {% else %}
                 <p class="empty">Nenhuma registração cadastrada para esta obra.</p>
             {% endif %}
-        </article>
+        </article> -->
 
         <article class="card card-full" style="animation-delay: 270ms;">
             <!-- <div class="kicker">Referências</div> -->

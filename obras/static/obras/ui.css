@@ -172,7 +172,7 @@ h1,
     color: var(--accent);
     display: block;
     font-size: 0.72rem;
-    font-weight: 700;
+    font-weight: 500;
     margin-bottom: 0.12rem;
 }
 
@@ -268,7 +268,7 @@ table {
 thead th {
     text-align: left;
     font-size: 0.72rem;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--accent);
     background: transparent;
     border-bottom: 2px solid var(--accent);
