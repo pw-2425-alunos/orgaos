@@ -7,6 +7,7 @@
     <title>{% block title %}Obras{% endblock %}</title>
     <link rel="icon" type="image/svg+xml" href="{% static 'favicon.svg' %}">
     <link rel="stylesheet" href="{% static 'obras/ui.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         :root {
             --bg: #f5f1e8;
@@ -207,7 +208,7 @@
             }
 
             .main { width: 100vw; }
-            .main-shell { padding: 12px; }
+            /* .main-shell { padding: 12px; } */
             .footer-sticky { margin-top: 8px; font-size: 11px; }
         }
     </style>
@@ -223,10 +224,9 @@
             <a href="{% url 'sobre' %}"{% if request.resolver_match.url_name == 'sobre' %} class="is-active"{% endif %}>Sobre</a>
             
             {% if user.is_authenticated %}
-                <span class="user-badge" style="padding-left:8px; padding-right:8px; margin-left:auto;">{{ user.username }}</span>
-                <a href="{% url 'logout' %}">Logout</a>
+                <a href="{% url 'logout' %}" style="margin-left:auto;">Logout <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i></a>
             {% else %}
-                <a href="{% url 'login' %}" style="margin-left:auto;">Login</a>
+                <a href="{% url 'login' %}" style="margin-left:auto;">Login <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i></a>
             {% endif %}
         </nav>
     </header>
