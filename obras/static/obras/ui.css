@@ -398,17 +398,6 @@ tbody tr:hover {
     overflow: hidden;
 }
 
-.landing-hero::after {
-    content: "";
-    position: absolute;
-    inset: auto -20% -48% auto;
-    width: 380px;
-    height: 380px;
-    border-radius: 0;
-    background: radial-gradient(circle, rgba(139, 46, 46, 0.18), rgba(139, 46, 46, 0));
-    pointer-events: none;
-}
-
 .text-block p {
     line-height: 1.7;
     font-size: 1.05rem;
