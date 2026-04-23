@@ -32,7 +32,11 @@
                         <ul class="list">
                             {% for compositor in grupo.itens %}
                                 <li class="item">
-                                    <a href="{% url 'compositor' compositor.id %}">{{ compositor }}</a>
+                                    <a href="{% url 'compositor' compositor.id %}">
+                                        <span style="font-weight: 700;">{{ compositor.apelido }}</span>,
+                                        {{ compositor.nome }}
+
+                                    </a>
                                 </li>
                             {% endfor %}
                         </ul>
