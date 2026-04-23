@@ -27,9 +27,12 @@
         }
 
         body {
+            min-height: 100%;
             margin: 0;
             font-family: Georgia, "Times New Roman", serif;
             color: var(--text);
+            display: flex;
+            flex-direction: column;
             /* background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.5), transparent 35%),
                         radial-gradient(circle at 80% 0%, rgba(139, 46, 46, 0.09), transparent 30%),
                         linear-gradient(180deg, #f8f4eb 0%, #f1ebdf 100%); */
@@ -142,6 +145,10 @@
             padding: 22px 28px 40px;
         }
 
+        .content-wrap {
+            flex: 1 0 auto;
+        }
+
         .main-shell {
             background: transparent;
             padding: 0;
@@ -231,7 +238,7 @@
         </nav>
     </header>
 
-    <div>
+    <div class="content-wrap">
         <main class="main">
             <div class="main-shell">
                 {% block content %}
@@ -239,6 +246,10 @@
             </div>
         </main>
     </div>
+
+    <footer class="footer-sticky" style="text-align: center; padding-bottom: 10px;">
+        2026 © André Ferreira
+    </footer>
 
     {% block extra_scripts %}{% endblock %}
 </body>
