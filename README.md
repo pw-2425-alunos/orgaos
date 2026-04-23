@@ -9,6 +9,3 @@
 
 # BD
 está independente em WebHS. mantém persistentes alterações que se façam
-
-# credenciais
-org, org26
