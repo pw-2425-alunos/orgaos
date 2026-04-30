@@ -3,9 +3,25 @@ from django.db import models
 class Compositor(models.Model):
     nome = models.CharField(max_length=100)
     apelido = models.CharField(max_length=100)
-
+    nascimento = models.CharField(max_length=30, blank=True, null=True, default="")
+    nascimento_c = models.BooleanField(blank=True, null=True, default=False)
+    morte = models.CharField(max_length=30, blank=True, null=True, default="")
+    morte_c = models.BooleanField(blank=True, null=True, default=False)
+    a = models.CharField(max_length=30, blank=True, null=True, default="")
+    d = models.CharField(max_length=30, blank=True, null=True, default="")
+    fl = models.CharField(max_length=30, blank=True, null=True, default="")
+    
     def __str__(self):
         return self.apelido + ', ' + self.nome
+
+
+class Referencia(models.Model):
+    nome = models.CharField(max_length=100, null=True, blank=True)
+    url = models.URLField(blank=True)
+    compositor = models.ForeignKey(Compositor, on_delete=models.CASCADE, related_name="referencias", null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.nome} ({self.url})"
 
 
 class Genero(models.Model):
@@ -38,6 +54,7 @@ class Tonalidade(models.Model):
 
 
 class Obra(models.Model):
+    obm = models.CharField(max_length=20, default="")
     titulo = models.CharField(max_length=100)
     compositor = models.ForeignKey(Compositor, related_name="obras", on_delete=models.CASCADE)
     ano = models.PositiveIntegerField(null=True, blank=True)
@@ -48,6 +65,7 @@ class Obra(models.Model):
     descricao_fisica = models.TextField(blank=True)
     onomastica = models.TextField(blank=True)
     referencias = models.TextField(blank=True)
+    observacoes = models.TextField(blank=True, default="")
     codigo = models.CharField(max_length=50, blank=True, default="")
 
     def __str__(self):

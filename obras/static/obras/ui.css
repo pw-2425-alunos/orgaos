@@ -280,9 +280,9 @@ thead th {
     text-align: left;
     font-size: 0.72rem;
     font-weight: 500;
-    color: var(--accent);
+    color: var(--gold);
     background: transparent;
-    border-bottom: 2px solid var(--accent);
+    border-bottom: 2px solid var(--gold);
     padding: 0.7rem 0.75rem;
 }
 
@@ -309,12 +309,13 @@ tbody tr:hover {
 
 .back {
     display: inline-block;
+    font-variant: small-caps;
     margin-top: 1rem;
     color: #f9f2e6;
     background: linear-gradient(170deg, #8b2e2e, #6f1f1f);
     text-decoration: none;
     padding: 0.62rem 0.9rem;
-    border-radius: 0;
+    border-radius: 5px;
     font-weight: 700;
     letter-spacing: 0.02em;
     box-shadow: 0 8px 20px rgba(68, 44, 16, 0.25);
@@ -327,8 +328,14 @@ tbody tr:hover {
 }
 
 .back-secondary {
-    background: linear-gradient(170deg, #d6c2bf, #b79692);
+    background: rgba(255, 255, 255, 0.58); 
     color: #431818;
+}
+
+.download {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
 }
 
 .search-form {
@@ -360,7 +367,7 @@ tbody tr:hover {
 .field label {
     font-size: 0.72rem;
     font-weight: 700;
-    color: var(--accent);
+    color: var(--gold);
 }
 
 .field input,

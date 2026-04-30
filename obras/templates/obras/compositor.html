@@ -6,8 +6,15 @@
 {% block content %}
     <section class="hero">
         <div class="kicker">Compositor</div>
-        <h1>{{ compositor.nome }} {{ compositor.apelido }}</h1>
-        <p class="subtitle">Obras associadas a este compositor.</p>
+        <h1>{{ compositor.nome }} {{ compositor.apelido }} 
+            {% if compositor.nascimento or compositor.morte %}
+            ({{ compositor.nascimento_c }}{{ compositor.nascimento }}-{{ compositor.morte_c }}{{ compositor.morte }})</h1>
+            {% elif compositor.a and compositor.d %}
+            (a. {{ compositor.a }} - d. {{ compositor.d }})</h1>
+            {% elif compositor.fl %}
+            (fl. {{ compositor.fl }})</h1>
+            {% endif %}
+            <p class="subtitle">Obras associadas a este compositor.</p>
     </section>
 
     <section class="card">

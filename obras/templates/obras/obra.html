@@ -26,13 +26,15 @@
             <!-- <div class="kicker">Informações</div> -->
             <h2>Detalhes da Obra</h2>
             <div class="details">
-                <p><strong>OBM</strong> {{ obra.codigo }}</p>                <p><strong>Ano</strong> {{ obra.ano|default:"-" }}</p>
+                <p><strong>OBM</strong> {{ obra.codigo }}</p>
+                <p><strong>Ano</strong> {{ obra.ano|default:"-" }}</p>
                 <p><strong>Género</strong> {{ obra.genero|default:"-" }}</p>
                 <p><strong>Tonalidade</strong> {{ obra.tonalidade|default:"-" }}</p>
                 <p><strong>Efectivo Vocal</strong> {{ obra.efectivo_vocal|default:"-" }}</p>
                 <p><strong>Efectivo do Orgão</strong> {{ obra.efectivo_orgao|format_orgaos|default:"-" }}</p>
                 <p><strong>Descrição física</strong> {{ obra.descricao_fisica|default:"-" }}</p>
                 <p><strong>Onomástica de solistas</strong> {{ obra.onomastica|default:"-" }}</p>
+                <p><strong>Observações</strong> {{ obra.observacoes|default:"-" }}</p>
 
             </div>
         </article>
