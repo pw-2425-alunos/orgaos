@@ -104,7 +104,7 @@
             <tbody>
                 {% for obra in obras %}
                 <tr onclick="window.location='{% url 'obra' obra.id %}'" style="cursor: pointer;">
-                    <td style="font-family: 'Courier New', monospace;">{{ obra.codigo }}</td>
+                    <td style="font-family: 'Courier New', monospace;">{{ obra.obm }}</td>
                     <td style="font-weight:bold;">{{ obra.titulo }}</td>
                     <td>{{ obra.compositor.nome }} {{ obra.compositor.apelido }}</td>
                     <td>{{ obra.genero|default:"-" }}</td>
