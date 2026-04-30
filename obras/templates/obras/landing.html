@@ -8,7 +8,7 @@
         <div class="text-block">
             <p>Este catálogo digital permite consultar, de forma simples, as obras históricas associadas aos órgãos da Basílica do Palácio Nacional de Mafra.</p>
             <p>O material é organizado em torno de uma navegação clara: uma página inicial descritiva, um catálogo por compositor e obra, com pesquisa integrada no topo, e uma secção sobre o projeto.</p>
-            <p>A consulta privilegia aquilo que interessa de imediato: <strong>código, compositor, peça</strong>, seguidos pelas <strong>registações</strong> e <strong>extensões de teclado</strong>.</p>
+            <p>A consulta privilegia aquilo que interessa de imediato: <strong>OBM, compositor, peça</strong>, seguidos pelas <strong>registações</strong> e <strong>extensões de teclado</strong>.</p>
         </div>
         <div class="landing-actions">
             <a class="back" href="{% url 'pesquisa' %}">Consultar o Catálogo</a>
@@ -18,6 +18,7 @@
         </div>
     </section>
 
+    {% comment %} 
     <section class="card stat-card-grid" style="animation-delay: 120ms;">
         <div class="kicker">Visão geral</div>
         <div class="stats">
@@ -26,4 +27,6 @@
             <div class="stat-chip"><strong>{{ total_registacoes }}</strong> registações indexadas</div>
         </div>
     </section>
+{% endcomment %}
+
 {% endblock %}

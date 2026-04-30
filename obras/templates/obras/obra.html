@@ -6,8 +6,12 @@
 {% block content %}
     <section class="hero">
         <div class="kicker">Obra</div>
-        <h1 class="title">{{ obra.titulo }}</h1>
-        <p class="subtitle">{{ obra.compositor }}</p>
+        <h1 class="title"> {{ obra.codigo }} · {{ obra.titulo }} em {{ obra.tonalidade }}, {{ obra.ano }} </h1>
+        <p class="subtitle">
+            <a href="{% url 'compositor' obra.compositor.id %}">
+            {{ obra.compositor.nome }} {{ obra.compositor.apelido }}</a>  · 
+            {{ obra.genero|default:"Género desconhecido" }}
+        </p>
     </section>
 
     <div class="actions-row">
@@ -22,13 +26,13 @@
             <!-- <div class="kicker">Informações</div> -->
             <h2>Detalhes da Obra</h2>
             <div class="details">
-                <p><strong>Código</strong> {{ obra.codigo }}</p>                <p><strong>Ano</strong> {{ obra.ano|default:"-" }}</p>
+                <p><strong>OBM</strong> {{ obra.codigo }}</p>                <p><strong>Ano</strong> {{ obra.ano|default:"-" }}</p>
                 <p><strong>Género</strong> {{ obra.genero|default:"-" }}</p>
                 <p><strong>Tonalidade</strong> {{ obra.tonalidade|default:"-" }}</p>
                 <p><strong>Efectivo Vocal</strong> {{ obra.efectivo_vocal|default:"-" }}</p>
                 <p><strong>Efectivo do Orgão</strong> {{ obra.efectivo_orgao|format_orgaos|default:"-" }}</p>
                 <p><strong>Descrição física</strong> {{ obra.descricao_fisica|default:"-" }}</p>
-                <p><strong>Onomástica</strong> {{ obra.onomastica|default:"-" }}</p>
+                <p><strong>Onomástica de solistas</strong> {{ obra.onomastica|default:"-" }}</p>
 
             </div>
         </article>
@@ -61,7 +65,7 @@
             {% endif %}
         </article>
 
-        <!-- <article class="card card-full" style="animation-delay: 200ms;">
+         <article class="card card-full" style="animation-delay: 200ms;">
             <!-- <div class="kicker">Registações</div> -->
             <h2>Registações</h2>
             {% if obra.orgaos.all %}
@@ -94,7 +98,7 @@
             {% else %}
                 <p class="empty">Nenhuma registração cadastrada para esta obra.</p>
             {% endif %}
-        </article> -->
+        </article> 
 
         <article class="card card-full" style="animation-delay: 270ms;">
             <!-- <div class="kicker">Referências</div> -->

@@ -7,7 +7,6 @@
         <!-- <div class="kicker">Compositores</div> -->
         <h1>Compositores</h1>
         <p class="subtitle">Percurso alfabético pelos compositores catalogados.</p>
-    </section>
 
     <section class="card">
         <div class="kicker">Navegação</div>
@@ -20,9 +19,9 @@
                 {% endif %}
             {% endfor %}
         </nav>
-    </section>
+</section>
 
-    <section class="card">
+    <section>
         {% if grupos_compositores %}
             <p class="results-meta">{{ compositores|length }} compositores</p>
             <div class="composer-groups">
@@ -47,6 +46,7 @@
             <p class="empty">Nenhum compositor cadastrado.</p>
         {% endif %}
     </section>
+</section>
 
     <a class="back" href="{% url 'landing' %}">Voltar para Início</a>
 {% endblock %}

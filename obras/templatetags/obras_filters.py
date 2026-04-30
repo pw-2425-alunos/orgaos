@@ -5,6 +5,11 @@ register = template.Library()
 
 
 @register.filter
+def eq(value, arg):
+    return str(value) == str(arg)
+
+
+@register.filter
 def format_orgaos(value):
     """
     Transforms values like '6org' to '6 órgãos'

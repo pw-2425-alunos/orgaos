@@ -5,6 +5,7 @@
     --ink-1: #1f1d1a;
     --ink-2: #5d5548;
     --accent: #8b2e2e;
+    --gold: #74561f;
     --line: rgba(139, 46, 46, 0.18);
     --shadow: 0 12px 40px rgba(46, 32, 16, 0.12);
     --radius: 0;
@@ -94,8 +95,18 @@ h1,
 
 .subtitle {
     margin: 0.55rem 0 0;
-    font-size: 1.06rem;
+    font-size: 0.95rem;
     color: var(--ink-2);
+    font-style: italic;
+}
+
+.subtitle a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+.subtitle a:hover {
+    text-decoration: underline;
 }
 
 .grid {
@@ -150,7 +161,7 @@ h1,
     margin: 0 0 0.7rem;
     font-size: 0.76rem;
     font-weight: 700;
-    color: var(--accent);
+    color: var(--gold);
 }
 
 .details {
@@ -325,9 +336,15 @@ tbody tr:hover {
     gap: 0.9rem;
 }
 
+.field-title-composer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+}
+
 .field-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 0.8rem;
 }
 
@@ -619,7 +636,7 @@ tbody tr:hover {
         overflow-x: hidden; /* importante para testar */
     }
 
-    .field-grid {
+    .field-grid, .field-title-composer {
         grid-template-columns: 1fr;
     }
 

@@ -607,7 +607,7 @@ tbody tr:hover { background: rgba(255,255,255,.45); }
         <div class="text-block">
           <p>Um catálogo digital para consultar, de forma simples, as obras históricas associadas aos órgãos da Basílica do Palácio Nacional de Mafra.</p>
           <p>Este catálogo organiza o material em torno de uma navegação clara: uma página inicial descritiva, um catálogo por compositor e obra, com pesquisa integrada no topo, e uma secção sobre o projeto.</p>
-          <p>A consulta privilegia aquilo que interessa de imediato: <strong>OBM + código + compositor + peça</strong>, seguidos pelas <strong>registações</strong> e <strong>extensões de teclado</strong>.</p>
+          <p>A consulta privilegia aquilo que interessa de imediato: <strong>OBM + compositor + peça</strong>, seguidos pelas <strong>registações</strong> e <strong>extensões de teclado</strong>.</p>
         </div>
         <div class="stats" id="stats"></div>
       </section>
@@ -615,7 +615,7 @@ tbody tr:hover { background: rgba(255,255,255,.45); }
         <div class="kicker">Catálogo</div>
         <div class="search-form">
           <div class="form-grid">
-            <div class="form-group"><label>Pesquisar</label><input id="search" type="text" placeholder="Título, código ou compositor."></div>
+            <div class="form-group"><label>Pesquisar</label><input id="search" type="text" placeholder="Título, OBM ou compositor."></div>
             <div class="form-group"><label>Compositor</label><select id="compositor"></select></div>
             <div class="form-group"><label>Género</label><select id="genero"></select></div>
             <div class="form-group"><label>Registação</label><input id="registacao" type="text" placeholder="Ex: Flautado, Tenorette…"></div>
@@ -642,7 +642,7 @@ tbody tr:hover { background: rgba(255,255,255,.45); }
         <div class="table-wrap">
           <table>
             <thead>
-              <tr><th>Código</th><th>Título</th><th>Compositor</th><th>Ano</th><th>Género</th><th>Reg.</th><th>Ext.</th></tr>
+              <tr><th>OBM</th><th>Título</th><th>Compositor</th><th>Ano</th><th>Género</th><th>Reg.</th><th>Ext.</th></tr>
             </thead>
             <tbody id="resultsBody"></tbody>
           </table>
@@ -806,7 +806,7 @@ function getWorkDetails(work) {
 function renderInfoPanel(work) {
   return `
     <div class="info-grid">
-      <div class="info-item"><div class="info-label">Código</div><div class="info-value">${esc(work.codigo_obra)}</div></div>
+      <div class="info-item"><div class="info-label">OBM</div><div class="info-value">${esc(work.codigo_obra)}</div></div>
       <div class="info-item"><div class="info-label">Compositor</div><div class="info-value">${esc(work.compositor)}</div></div>
       <div class="info-item"><div class="info-label">Título</div><div class="info-value">${esc(work.titulo)}</div></div>
       <div class="info-item"><div class="info-label">Ano</div><div class="info-value">${esc(work.ano)}</div></div>
