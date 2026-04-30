@@ -7,6 +7,11 @@
         <!-- <div class="kicker">Compositores</div> -->
         <h1>Compositores</h1>
         <p class="subtitle">Percurso alfabético pelos compositores catalogados.</p>
+        {% if user.is_authenticated %}
+            <div class="actions-row">
+                <a class="back" href="{% url 'criar_compositor' %}">Criar compositor</a>
+            </div>
+        {% endif %}
 
     <section class="card">
         <div class="kicker">Navegação</div>
@@ -34,6 +39,9 @@
                                     <a href="{% url 'compositor' compositor.id %}">
                                         <span style="font-weight: 700;">{{ compositor.apelido }}</span>,
                                         {{ compositor.nome }}
+                                        {% if compositor.info_cronologica %}
+                                            <span class="composer-inline-meta">({{ compositor.info_cronologica }})</span>
+                                        {% endif %}
 
                                     </a>
                                 </li>

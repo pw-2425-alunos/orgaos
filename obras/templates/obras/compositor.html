@@ -6,15 +6,19 @@
 {% block content %}
     <section class="hero">
         <div class="kicker">Compositor</div>
-        <h1>{{ compositor.nome }} {{ compositor.apelido }} 
-            {% if compositor.nascimento or compositor.morte %}
-            ({{ compositor.nascimento_c }}{{ compositor.nascimento }}-{{ compositor.morte_c }}{{ compositor.morte }})</h1>
-            {% elif compositor.a and compositor.d %}
-            (a. {{ compositor.a }} - d. {{ compositor.d }})</h1>
-            {% elif compositor.fl %}
-            (fl. {{ compositor.fl }})</h1>
+        <h1>
+            {{ compositor.nome }} {{ compositor.apelido }}
+            {% if compositor.info_cronologica %}
+                ({{ compositor.info_cronologica }})
             {% endif %}
-            <p class="subtitle">Obras associadas a este compositor.</p>
+        </h1>
+        <p class="subtitle">Obras associadas a este compositor.</p>
+
+        {% if user.is_authenticated %}
+            <div class="actions-row">
+                <a class="back" href="{% url 'editar_compositor' compositor.id %}">Editar compositor</a>
+            </div>
+        {% endif %}
     </section>
 
     <section class="card">
@@ -35,5 +39,24 @@
         {% endif %}
     </section>
 
-    <a class="back" href="{% url 'compositores' %}">Voltar para compositores</a>
+    <section class="card">
+        <h2>Referências</h2>
+        {% if compositor.referencias.all %}
+            <ul class="list">
+                {% for referencia in compositor.referencias.all %}
+                    <li class="item">
+                        <a href="{{ referencia.url }}" target="_blank" rel="noopener noreferrer">
+                            {{ referencia.nome|default:referencia.url }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty">Sem referências associadas.</p>
+        {% endif %}
+    </section>
+
+    <div class="actions-row">
+        <a class="back back-secondary" href="{% url 'compositores' %}">Voltar para compositores</a>
+    </div>
 {% endblock %}

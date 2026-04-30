@@ -10,6 +10,31 @@ class Compositor(models.Model):
     a = models.CharField(max_length=30, blank=True, null=True, default="")
     d = models.CharField(max_length=30, blank=True, null=True, default="")
     fl = models.CharField(max_length=30, blank=True, null=True, default="")
+
+    @property
+    def info_cronologica(self):
+        nascimento = (self.nascimento or "").strip()
+        morte = (self.morte or "").strip()
+        a_val = (self.a or "").strip()
+        d_val = (self.d or "").strip()
+        fl_val = (self.fl or "").strip()
+
+        if nascimento or morte:
+            nasc = f"c.{nascimento}" if self.nascimento_c and nascimento else nascimento
+            mort = f"c.{morte}" if self.morte_c and morte else morte
+            return f"{nasc}-{mort}".strip("-")
+
+        if a_val or d_val:
+            if a_val and d_val:
+                return f"a. {a_val} - d. {d_val}"
+            if a_val:
+                return f"a. {a_val}"
+            return f"d. {d_val}"
+
+        if fl_val:
+            return f"fl. {fl_val}"
+
+        return ""
     
     def __str__(self):
         return self.apelido + ', ' + self.nome

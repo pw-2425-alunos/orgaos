@@ -1,0 +1,174 @@
+{% extends "obras/layout.html" %}
+
+{% block title %}{{ titulo_pagina }}{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <div class="kicker">Compositor</div>
+        <h1>{{ titulo_pagina }}</h1>
+        <p class="subtitle">Preencha os dados do compositor.</p>
+    </section>
+
+    <section class="card">
+        {% if form.non_field_errors %}
+            <div class="message-error">
+                {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if referencia_formset.non_form_errors %}
+            <div class="message-error">
+                {% for error in referencia_formset.non_form_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="post" class="search-form">
+            {% csrf_token %}
+            {{ referencia_formset.management_form }}
+
+            <div class="field-grid">
+                <div class="field">
+                    <label for="{{ form.apelido.id_for_label }}">{{ form.apelido.label }} *</label>
+                    {{ form.apelido }}
+                    {% for error in form.apelido.errors %}
+                        <p class="empty">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="field">
+                    <label for="{{ form.nome.id_for_label }}">{{ form.nome.label }} *</label>
+                    {{ form.nome }}
+                    {% for error in form.nome.errors %}
+                        <p class="empty">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="field">
+                    <label for="{{ form.nascimento.id_for_label }}">{{ form.nascimento.label }}</label>
+                    {{ form.nascimento }}
+                </div>
+
+                <div class="field" style="display:flex; align-items:center; gap:0.5rem;">
+                    <label for="{{ form.nascimento_c.id_for_label }}" style="margin:0;">{{ form.nascimento_c.label }}</label>
+                    {{ form.nascimento_c }}
+                </div>
+
+                <div class="field">
+                    <label for="{{ form.morte.id_for_label }}">{{ form.morte.label }}</label>
+                    {{ form.morte }}
+                </div>
+
+                <div class="field" style="display:flex; align-items:center; gap:0.5rem;">
+                    <label for="{{ form.morte_c.id_for_label }}" style="margin:0;">{{ form.morte_c.label }}</label>
+                    {{ form.morte_c }}
+                </div>
+
+                <div class="field">
+                    <label for="{{ form.a.id_for_label }}">{{ form.a.label }}</label>
+                    {{ form.a }}
+                </div>
+
+                <div class="field">
+                    <label for="{{ form.d.id_for_label }}">{{ form.d.label }}</label>
+                    {{ form.d }}
+                </div>
+
+                <div class="field field-wide">
+                    <label for="{{ form.fl.id_for_label }}">{{ form.fl.label }}</label>
+                    {{ form.fl }}
+                </div>
+
+                <div class="field field-wide section-divider">
+                    <h3 class="section-subtitle">Referências</h3>
+                    <p class="section-note">Pode adicionar, editar ou remover referências deste compositor.</p>
+
+                    <div id="referencias-container">
+                    {% for ref_form in referencia_formset %}
+                        <div class="field-grid referencia-form-item" style="margin-bottom: 0.7rem; padding: 0.7rem; border: 1px solid rgba(139, 46, 46, 0.14);">
+                            {{ ref_form.id }}
+
+                            <div class="field">
+                                <label for="{{ ref_form.nome.id_for_label }}">{{ ref_form.nome.label }}</label>
+                                {{ ref_form.nome }}
+                                {% for error in ref_form.nome.errors %}
+                                    <p class="empty">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+
+                            <div class="field field-wide">
+                                <label for="{{ ref_form.url.id_for_label }}">{{ ref_form.url.label }}</label>
+                                {{ ref_form.url }}
+                                {% for error in ref_form.url.errors %}
+                                    <p class="empty">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+
+                            <div class="field" style="display:flex; align-items:center; gap:0.5rem;">
+                                <label for="{{ ref_form.DELETE.id_for_label }}" style="margin:0;">Remover</label>
+                                {{ ref_form.DELETE }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+
+                    <template id="referencia-empty-template">
+                        <div class="field-grid referencia-form-item" style="margin-bottom: 0.7rem; padding: 0.7rem; border: 1px solid rgba(139, 46, 46, 0.14);">
+                            {{ referencia_formset.empty_form.id }}
+
+                            <div class="field">
+                                <label for="{{ referencia_formset.empty_form.nome.id_for_label }}">{{ referencia_formset.empty_form.nome.label }}</label>
+                                {{ referencia_formset.empty_form.nome }}
+                            </div>
+
+                            <div class="field field-wide">
+                                <label for="{{ referencia_formset.empty_form.url.id_for_label }}">{{ referencia_formset.empty_form.url.label }}</label>
+                                {{ referencia_formset.empty_form.url }}
+                            </div>
+
+                            <div class="field" style="display:flex; align-items:center; gap:0.5rem;">
+                                <label for="{{ referencia_formset.empty_form.DELETE.id_for_label }}" style="margin:0;">Remover</label>
+                                {{ referencia_formset.empty_form.DELETE }}
+                            </div>
+                        </div>
+                    </template>
+
+                    <button type="button" id="add-referencia-btn" class="back back-secondary">+ Adicionar referência</button>
+                </div>
+            </div>
+
+            <div class="actions-row">
+                <button type="submit" class="back">{{ texto_botao }}</button>
+                {% if compositor %}
+                    <a class="back back-secondary" href="{% url 'compositor' compositor.id %}">Cancelar</a>
+                {% else %}
+                    <a class="back back-secondary" href="{% url 'compositores' %}">Cancelar</a>
+                {% endif %}
+            </div>
+        </form>
+    </section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    (function () {
+        const totalFormsInput = document.getElementById("id_referencias-TOTAL_FORMS");
+        const container = document.getElementById("referencias-container");
+        const template = document.getElementById("referencia-empty-template");
+        const addButton = document.getElementById("add-referencia-btn");
+
+        if (!totalFormsInput || !container || !template || !addButton) {
+            return;
+        }
+
+        addButton.addEventListener("click", function () {
+            const formIndex = Number(totalFormsInput.value);
+            const html = template.innerHTML.replaceAll("__prefix__", String(formIndex));
+            container.insertAdjacentHTML("beforeend", html);
+            totalFormsInput.value = String(formIndex + 1);
+        });
+    })();
+</script>
+{% endblock %}

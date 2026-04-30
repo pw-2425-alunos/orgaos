@@ -6,8 +6,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Case, Count, Q, Value, When
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
+from .forms import CompositorForm, ReferenciaFormSet
 from .models import Compositor, Extensao, Genero, Nota, Obra, Orgao, Registacao, Registo, Tonalidade
 
 
@@ -188,11 +189,53 @@ def pesquisa_view(request):
 
 
 def compositor_view(request, id):
-    compositor = Compositor.objects.get(id = id)
+    compositor = get_object_or_404(Compositor, id=id)
     context = {
         'compositor': compositor
     }
     return render(request, "obras/compositor.html", context)
+
+
+@login_required(login_url="login")
+def criar_compositor_view(request):
+    compositor_tmp = Compositor()
+    form = CompositorForm(request.POST or None)
+    referencia_formset = ReferenciaFormSet(request.POST or None, instance=compositor_tmp, prefix="referencias")
+
+    if request.method == "POST" and form.is_valid() and referencia_formset.is_valid():
+        compositor = form.save()
+        referencia_formset.instance = compositor
+        referencia_formset.save()
+        return redirect("compositor", id=compositor.id)
+
+    context = {
+        "form": form,
+        "referencia_formset": referencia_formset,
+        "titulo_pagina": "Criar Compositor",
+        "texto_botao": "Criar compositor",
+    }
+    return render(request, "obras/compositor_form.html", context)
+
+
+@login_required(login_url="login")
+def editar_compositor_view(request, id):
+    compositor = get_object_or_404(Compositor, id=id)
+    form = CompositorForm(request.POST or None, instance=compositor)
+    referencia_formset = ReferenciaFormSet(request.POST or None, instance=compositor, prefix="referencias")
+
+    if request.method == "POST" and form.is_valid() and referencia_formset.is_valid():
+        compositor = form.save()
+        referencia_formset.save()
+        return redirect("compositor", id=compositor.id)
+
+    context = {
+        "form": form,
+        "referencia_formset": referencia_formset,
+        "compositor": compositor,
+        "titulo_pagina": "Editar Compositor",
+        "texto_botao": "Guardar alterações",
+    }
+    return render(request, "obras/compositor_form.html", context)
 
 
 def obra_view(request, id):
