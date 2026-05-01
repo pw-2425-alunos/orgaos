@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-a2ia*huc(x0^ig6tsebbjo7gr&c6y#brj-g-6w=m8ag34nwgc8
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # Use DEBUG=True only in local development environments.
-DEBUG = True # env.bool("DEBUG", default=False)
+DEBUG = env.bool("DEBUG", default=False)
 
 ALLOWED_HOSTS = [
     'orgaos.pw.deisi.ulusofona.pt',

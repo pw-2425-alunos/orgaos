@@ -551,11 +551,19 @@ tbody tr:hover {
 
 .catalogo-html img {
     width: auto;
-    height: 1em;
-    vertical-align: middle;
+    height: auto;
+    width:100%;
+    max-width: 700px;
 }
 
-.catalogo-html p > img:only-child,
+.catalogo-html li img {
+    height: 1.5ch !important;
+    width: auto !important;
+    max-width: none;
+    display: inline-block;
+    vertical-align: -0.12em;
+}
+
 .catalogo-html li > img:only-child,
 .catalogo-html div > img:only-child,
 .catalogo-html figure > img:only-child {

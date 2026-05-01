@@ -5,6 +5,7 @@ import json
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
 django.setup()
 
+from django.conf import settings
 from django.core.management import call_command
 from django.core.management.base import CommandError
 
@@ -205,11 +206,15 @@ def carregar_json(ficheiro="auxiliar/short.json"):
 
     print("Importação concluída:", len(dados), "obras")
 
-    # Redimensiona e otimiza as imagens do catálogo para largura máxima de 800px.
-    try:
-        call_command("optimize_catalog_images", width=800)
-    except CommandError as exc:
-        print("Aviso ao otimizar imagens:", exc)
+    # Só otimiza quando já existem imagens extraídas em MEDIA_ROOT/catalogo.
+    catalogo_media_dir = settings.MEDIA_ROOT / "catalogo"
+    if catalogo_media_dir.exists():
+        try:
+            call_command("optimize_catalog_images", width=800)
+        except CommandError as exc:
+            print("Aviso ao otimizar imagens:", exc)
+    else:
+        print("Otimização de imagens ignorada: sem imagens em", catalogo_media_dir)
 
 
 if __name__ == "__main__":

@@ -20,6 +20,11 @@ auxiliar> python gera_json.py
 > python manage.py import_catalogo_info --source-dir "C:\Users\lucio\Downloads\catalogacao\catalogacao"
 ```
 
+# Códigos sem obra correspondente
+
+Secções preparadas: 170
+Códigos sem obra correspondente: 03-03, 03-05, 03-09, 03-15, 03-16, 03-17, 03-19, 03-25, 03-26, 03-28, 04-03, 04-05, 04-07, 04-09, 04-11, 04-13, 04-15, 04-17, 04-19, 04-21, 04-23, 04-25, 04-27, 05-07, 05-09, 05-11, 05-13, 05-15, 05-17, 05-18, 05-19, 05-20, 05-21, 05-23, 14-18, 35-62, 57-58, 58-60, 59-60, 62-63, 63-87, 68-74, 74-75, 75-77, 78-79, 79-80, 81-82, 86-87, 90-92, 92-93, 94-95, 96-98
+
 # Processo ETL Excel -> BD
 
 Converter para JSON:
@@ -161,3 +166,5 @@ pandoc --version
   ```bash
   python manage.py import_catalogo_info
   ```
+
+

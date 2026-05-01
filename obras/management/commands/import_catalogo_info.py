@@ -9,6 +9,7 @@ from urllib.parse import urlparse
 
 from bs4 import BeautifulSoup, NavigableString, Tag
 from django.conf import settings
+from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 from django.utils.text import slugify
@@ -141,12 +142,19 @@ class Command(BaseCommand):
             default="catalogo",
             help="Subdiretório dentro de MEDIA_ROOT para guardar imagens extraídas.",
         )
+        parser.add_argument(
+            "--image-width",
+            type=int,
+            default=800,
+            help="Largura máxima (px) para otimizar as imagens extraídas; usa 0 para desativar.",
+        )
 
     def handle(self, *args, **options):
         source_dir = Path(options["source_dir"])
         pandoc_bin = options["pandoc_bin"]
         dry_run = options["dry_run"]
         media_subdir = options["media_subdir"]
+        image_width = options["image_width"]
 
         if not source_dir.is_absolute():
             source_dir = Path(settings.BASE_DIR) / source_dir
@@ -204,6 +212,10 @@ class Command(BaseCommand):
                 for obra in obras:
                     obra.info_catalogo = updates[obra.id]
                 Obra.objects.bulk_update(obras, ["info_catalogo"])
+
+        if not dry_run and image_width > 0:
+            self.stdout.write("A otimizar imagens do catálogo...")
+            call_command("optimize_catalog_images", source_dir=media_subdir, width=image_width)
 
         self.stdout.write(self.style.SUCCESS(f"Secções preparadas: {len(updates)}"))
         if dry_run:
