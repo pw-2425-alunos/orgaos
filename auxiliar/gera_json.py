@@ -1,8 +1,39 @@
-import pandas as pd
 import json
 import re
+from pathlib import Path
 
-EXCEL_FILE = "catalogo_todas_as_obras.xlsx"
+import pandas as pd
+
+
+BASE_DIR = Path(__file__).resolve().parent
+DEFAULT_EXCEL_FILE = BASE_DIR / "catalogo_todas_as_obras.xlsx"
+DEFAULT_OUTPUT_FILE = BASE_DIR / "short.json"
+
+MAPA_NOTAS = {
+    "Do": "Dó",
+    "Re": "Ré",
+    "Fa": "Fá",
+    "La": "Lá"
+}
+
+MAPA_NOTAS_CANONICAS = {
+    "do": "Dó",
+    "dó": "Dó",
+    "re": "Ré",
+    "ré": "Ré",
+    "mi": "Mi",
+    "fa": "Fá",
+    "fá": "Fá",
+    "sol": "Sol",
+    "la": "Lá",
+    "lá": "Lá",
+    "si": "Si",
+}
+
+PALAVRAS_MINUSCULAS = {
+    "a", "ao", "aos", "as", "da", "das", "de", "do", "dos",
+    "e", "em", "na", "nas", "no", "nos", "o", "os", "por"
+}
 
 
 # ---------------------------------------------------
@@ -49,6 +80,105 @@ def simbolo_acidente(a):
     if a == "#":
         return "♯"
     return ""
+
+
+def normalizar_nota(nota):
+    if not nota:
+        return None
+
+    nota = str(nota).strip()
+    nota = re.sub(r"\s+", "", nota)
+
+    match = re.match(r"^(Do|Dó|Re|Ré|Mi|Fa|Fá|Sol|La|Lá|Si)([b#♭♯]?)$", nota, re.IGNORECASE)
+    if not match:
+        return nota or None
+
+    base = MAPA_NOTAS_CANONICAS.get(match.group(1).lower(), match.group(1))
+    acidente = simbolo_acidente(match.group(2).replace("♭", "b").replace("♯", "#"))
+
+    return f"{base}{acidente}" if acidente else base
+
+
+def normalizar_modo(modo):
+    if not modo:
+        return None
+
+    modo_txt = re.sub(r"[^A-Za-zÀ-ÿ]", "", str(modo).strip())
+
+    if modo_txt == "M" or modo_txt.lower() == "maior":
+        return "Maior"
+
+    if modo_txt == "m" or modo_txt.lower() == "menor":
+        return "menor"
+
+    return None
+
+
+def garantir_title(txt):
+    if not txt:
+        return txt
+
+    txt = str(txt).strip()
+
+    if not txt:
+        return txt
+
+    palavras = txt.split()
+    resultado = []
+    ultima_posicao = len(palavras) - 1
+
+    for indice, palavra in enumerate(palavras):
+        palavra_title = palavra[:1].upper() + palavra[1:].lower() if palavra else palavra
+        palavra_limpa = re.sub(r"^[^A-Za-zÀ-ÿ]*|[^A-Za-zÀ-ÿ]*$", "", palavra).lower()
+
+        if indice not in {0, ultima_posicao} and palavra_limpa in PALAVRAS_MINUSCULAS:
+            palavra_title = palavra.lower()
+
+        resultado.append(palavra_title)
+
+    return " ".join(resultado)
+
+
+def extrair_tonalidade_do_titulo(titulo):
+    if not titulo:
+        return None
+
+    pattern = re.compile(
+        r"^(?P<base>.+?)\s*(?:em\s+)?(?P<nota>Dó|Ré|Mi|Fá|Sol|Lá|Si|Do|Re|Fa|La)(?P<acc>[♭♯b#])?\s*(?P<modo>M|m|Maior|menor)\s*$",
+        re.IGNORECASE,
+    )
+
+    match = pattern.match(str(titulo).strip())
+    if not match:
+        return None
+
+    base = match.group("base").strip(" -\t")
+    nota = normalizar_nota((match.group("nota") or "") + (match.group("acc") or ""))
+    modo = normalizar_modo(match.group("modo"))
+
+    if not base or not nota or not modo:
+        return None
+
+    return {
+        "base": base,
+        "nota": nota,
+        "modo": modo,
+    }
+
+
+def corrigir_titulo_obra(titulo, nota, modo):
+    parse = extrair_tonalidade_do_titulo(titulo)
+
+    if not parse:
+        return garantir_title(titulo)
+
+    nota_normalizada = normalizar_nota(nota)
+    modo_normalizado = normalizar_modo(modo)
+
+    if parse["nota"] == nota_normalizada and parse["modo"] == modo_normalizado:
+        return garantir_title(parse["base"])
+
+    return garantir_title(titulo)
 
 
 # ---------------------------------------------------
@@ -99,39 +229,22 @@ def parse_tonalidade(txt):
 
     txt = normalizar_acidentes(txt)
 
-    # separar partes
-    partes = txt.split()
+    match = re.match(
+        r"^\s*(?P<nota>Do|Dó|Re|Ré|Mi|Fa|Fá|Sol|La|Lá|Si)(?P<acc>[b#]?)\s*(?P<modo>M|m|Maior|menor)?\s*$",
+        txt,
+        re.IGNORECASE,
+    )
 
-    nota_parte = partes[0]
-
-    modo = None
-
-    if len(partes) > 1:
-        modo_txt = partes[1].lower()
-
-        if modo_txt in ["m", "menor"]:
-            modo = "menor"
-
-        elif modo_txt in ["m", "maior", "M"]:
-            modo = "Maior"
-
-    # extrair nota
-    m = re.match(r"^(Dó|Ré|Mi|Fá|Sol|Lá|Si)(#|b)?$", nota_parte)
-
-    if not m:
+    if not match:
         return None, None
 
-    nota = m.group(1)
-
-    acidente = simbolo_acidente(m.group(2))
-
-    if acidente:
-        nota += acidente
+    nota_parte = normalizar_nota((match.group("nota") or "") + (match.group("acc") or ""))
+    modo = normalizar_modo(match.group("modo"))
 
     if modo is None:
         modo = "Maior"
 
-    return nota, modo
+    return nota_parte, modo
 
 # ---------------------------------------------------
 # EXTENSÕES
@@ -223,7 +336,7 @@ def ler_folha(df, id_obra):
     obra = {
         "id": id_obra,
         "obm": obm,
-        "titulo": dados.get("Título"),
+        "titulo": corrigir_titulo_obra(dados.get("Título"), nota, modo),
         "ano": dados.get("Ano"),
         "efectivo_vocal": dados.get("Efectivo Vocal"),
         "efectivo_orgao": dados.get("Efectivo Órgão"),
@@ -330,9 +443,17 @@ def ler_folha(df, id_obra):
 # MAIN
 # ---------------------------------------------------
 
-def main():
+def gerar_json(excel_file=DEFAULT_EXCEL_FILE, output_file=DEFAULT_OUTPUT_FILE):
 
-    xls = pd.ExcelFile(EXCEL_FILE)
+    excel_path = Path(excel_file)
+    if not excel_path.is_absolute():
+        excel_path = BASE_DIR / excel_path
+
+    output_path = Path(output_file)
+    if not output_path.is_absolute():
+        output_path = BASE_DIR / output_path
+
+    xls = pd.ExcelFile(excel_path)
 
     obras = []
 
@@ -352,7 +473,7 @@ def main():
 
         id_obra += 1
 
-    with open("short.json", "w", encoding="utf8") as f:
+    with output_path.open("w", encoding="utf8") as f:
 
         json.dump(
             obras,
@@ -361,7 +482,13 @@ def main():
             indent=4
         )
 
-    print("JSON gerado com", len(obras), "obras")
+    return len(obras), output_path
+
+
+def main(excel_file=DEFAULT_EXCEL_FILE, output_file=DEFAULT_OUTPUT_FILE):
+
+    total_obras, output_path = gerar_json(excel_file=excel_file, output_file=output_file)
+    print("JSON gerado com", total_obras, "obras em", output_path)
 
 
 # ---------------------------------------------------

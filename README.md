@@ -1,5 +1,56 @@
 # CI/CD para WebHS
 
+# Localização dos Dados
+
+Para carregar dados na base de dados, este projeto usa duas origens distintas:
+
+* Excel do catálogo: por omissão em `auxiliar/catalogo_todas_as_obras.xlsx`.
+* Ficheiros Word do catálogo: por omissão em `auxiliar/catalogo`, mas podem estar noutra pasta. No cenário atual, por exemplo, podem estar em `C:\Users\lucio\Downloads\catalogo\catalogo`.
+
+## Como configurar
+
+Não é preciso alterar código para mudar a localização destes ficheiros. Os caminhos podem ser passados diretamente nos commands.
+
+### Excel
+
+Por omissão:
+```parse
+> python .\manage.py gera_json
+```
+
+Com outro ficheiro Excel:
+```parse
+> python .\manage.py gera_json --excel-file "C:\Users\lucio\Downloads\catalogo\catalogo_todas_as_obras.xlsx"
+```
+
+Também é possível escolher explicitamente onde gravar o JSON gerado:
+```parse
+> python .\manage.py gera_json --excel-file "C:\Users\lucio\Downloads\catalogo\catalogo_todas_as_obras.xlsx" --output auxiliar\short.json
+```
+
+### Word / DOCX
+
+Por omissão:
+```parse
+> python .\manage.py import_catalogo_info
+```
+
+Com outra pasta de DOCX:
+```parse
+> python .\manage.py import_catalogo_info --source-dir "C:\Users\lucio\Downloads\catalogo\catalogo"
+```
+
+Se também estiveres a usar o command que extrai OBM a partir dos DOCX, a configuração é feita da mesma forma:
+```parse
+> python .\manage.py import_obm_from_catalogo --source-dir "C:\Users\lucio\Downloads\catalogo\catalogo"
+```
+
+## Recomendação prática
+
+* Se quiseres zero configuração, coloca o Excel em `auxiliar/catalogo_todas_as_obras.xlsx` e os DOCX em `auxiliar/catalogo`.
+* Se preferires manter os dados fora do repositório, usa `--excel-file` e `--source-dir` nos commands.
+* O ponto importante é que os commands devem ser executados a partir da raiz do projeto.
+
 * dar commmit e push para remote GitHub
 * em [WebHS](https://hosting45.serverhs.org:2083/cpsess7752493317/frontend/jupiter/version_control/index.html#/manage/%252Fhome%252Fobmdatab%252Frepositories%252Forgaos-2/deploy), Git\Pull or Deploy, fazer Ùpdate from Remote`
 * em [WebApplication](https://hosting45.serverhs.org:2083/cpsess7752493317/frontend/jupiter/lveversion/python-selector.html.tt#/applications/repositories%2Forgaos-2):
@@ -12,24 +63,17 @@
 # BD
 está independente em WebHS. mantém persistentes alterações que se façam
 
-sequencia de comandos:
-```parse
-auxiliar> python gera_json.py
-> python .\manage.py migrate
-> python .\carrega_obras.py
-> python manage.py import_catalogo_info --source-dir "C:\Users\lucio\Downloads\catalogacao\catalogacao"
-```
-
-# Códigos sem obra correspondente
-
-Secções preparadas: 170
-Códigos sem obra correspondente: 03-03, 03-05, 03-09, 03-15, 03-16, 03-17, 03-19, 03-25, 03-26, 03-28, 04-03, 04-05, 04-07, 04-09, 04-11, 04-13, 04-15, 04-17, 04-19, 04-21, 04-23, 04-25, 04-27, 05-07, 05-09, 05-11, 05-13, 05-15, 05-17, 05-18, 05-19, 05-20, 05-21, 05-23, 14-18, 35-62, 57-58, 58-60, 59-60, 62-63, 63-87, 68-74, 74-75, 75-77, 78-79, 79-80, 81-82, 86-87, 90-92, 92-93, 94-95, 96-98
 
 # Processo ETL Excel -> BD
 
 Converter para JSON:
 ```parse
-auxiliar>python gera_json.py
+> python .\manage.py gera_json
+```
+
+Com caminhos explícitos:
+```parse
+> python .\manage.py gera_json --excel-file auxiliar\catalogo_todas_as_obras.xlsx --output auxiliar\short.json
 ```
 
 criar base de dados:
@@ -39,8 +83,18 @@ criar base de dados:
 
 carregar obras:
 ```parse
-> python .\carrega_obras.py
+> python .\manage.py carrega_obras
 ```
+
+Com caminho explícito para o JSON:
+```parse
+> python .\manage.py carrega_obras --ficheiro auxiliar\short.json
+```
+
+Notas:
+* `gera_json` lê por omissão `auxiliar/catalogo_todas_as_obras.xlsx` e escreve `auxiliar/short.json`.
+* `carrega_obras` lê por omissão `auxiliar/short.json`.
+* Os scripts [c:\Users\lucio\Downloads\orgaos-1\auxiliar\gera_json.py](c:\Users\lucio\Downloads\orgaos-1\auxiliar\gera_json.py) e [c:\Users\lucio\Downloads\orgaos-1\carrega_obras.py](c:\Users\lucio\Downloads\orgaos-1\carrega_obras.py) continuam a expor a lógica, mas o ponto de entrada recomendado passa a ser via `manage.py`.
 
 # Catalogo PDF / Word
 
@@ -77,9 +131,18 @@ Ha varios ficheiros word com info de obras. Para cada compositor:
    python manage.py migrate
    ```
 
+### 1) Remover Headers de DOCX
+
+remover os headers dos ficheirois DOCX com
+```bash
+python limpa_headers_word.py
+```
+
 ### 1) ETL do conteúdo HTML + imagens de cada obra
 
 Lê os DOCX em `auxiliar/catalogo` (ou outra pasta a especificar), extrai conteúdo por obra, guarda HTML em `Obra.info_catalogo` e imagens de forma persistente em `mediafiles/catalogo/...`.
+
+vai converter as imagens para 800px de largura, embora a resolução original seja muito maior
 
 Teste sem gravar:
 ```bash

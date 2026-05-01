@@ -283,7 +283,7 @@
         },
         "tonalidade": {
             "nota": "Dó",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 2,
@@ -620,7 +620,7 @@
         },
         "tonalidade": {
             "nota": "Fá",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 3,
@@ -643,12 +643,12 @@
         },
         "tonalidade": {
             "nota": "Fá",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 4,
             "obm": "01-04",
-            "titulo": "BENEDICTUS ET CHRISTUS Fá M",
+            "titulo": "Benedictus Et Christus",
             "ano": "0",
             "efectivo_vocal": "TBBB",
             "efectivo_orgao": "org",
@@ -695,7 +695,7 @@
         "obra": {
             "id": 5,
             "obm": "01-05",
-            "titulo": "NOVENA DO CORAÇÃO DE JESUS Fá M",
+            "titulo": "Novena do Coração de Jesus",
             "ano": "0",
             "efectivo_vocal": "TTBB ?",
             "efectivo_orgao": "4org ?",
@@ -846,12 +846,12 @@
         },
         "tonalidade": {
             "nota": "Dó",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 6,
             "obm": "01-06",
-            "titulo": "Sinfonia Dó M",
+            "titulo": "Sinfonia",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "4org",
@@ -926,7 +926,7 @@
         "obra": {
             "id": 7,
             "obm": "01-07",
-            "titulo": "Sinfonia Ré M",
+            "titulo": "Sinfonia",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "4org",
@@ -1038,7 +1038,7 @@
         "obra": {
             "id": 8,
             "obm": "01-08",
-            "titulo": "Sinfonia Ré M",
+            "titulo": "Sinfonia",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "4org",
@@ -1101,12 +1101,12 @@
         },
         "tonalidade": {
             "nota": "Ré",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 9,
             "obm": "01-09",
-            "titulo": "Sinfonia Ré M",
+            "titulo": "Sinfonia",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "4org",
@@ -1167,7 +1167,7 @@
         "obra": {
             "id": 10,
             "obm": "02-01",
-            "titulo": "Missa em Dó Maior",
+            "titulo": "Missa",
             "ano": "1806, 1823",
             "efectivo_vocal": "TTBB",
             "efectivo_orgao": "4org",
@@ -1190,7 +1190,7 @@
         "obra": {
             "id": 11,
             "obm": "02-01",
-            "titulo": "Missa em Dó Maior",
+            "titulo": "Missa",
             "ano": "1806, 1823",
             "efectivo_vocal": "TTBB",
             "efectivo_orgao": "4org",
@@ -1458,7 +1458,7 @@
         "obra": {
             "id": 12,
             "obm": "02-01",
-            "titulo": "Missa em Dó Maior",
+            "titulo": "Missa",
             "ano": "1806, 1823",
             "efectivo_vocal": "TTBB",
             "efectivo_orgao": "4org",
@@ -1798,7 +1798,7 @@
         "obra": {
             "id": 13,
             "obm": "02-01",
-            "titulo": "Missa em Dó Maior",
+            "titulo": "Missa",
             "ano": "1806, 1823",
             "efectivo_vocal": "TTBB",
             "efectivo_orgao": "4org",
@@ -1879,7 +1879,7 @@
         "obra": {
             "id": 14,
             "obm": "02-01",
-            "titulo": "Missa em Dó Maior",
+            "titulo": "Missa",
             "ano": "1806",
             "efectivo_vocal": "TTBB",
             "efectivo_orgao": "4org",
@@ -2275,7 +2275,7 @@
         "obra": {
             "id": 15,
             "obm": "02-02",
-            "titulo": "Missa em Ré M",
+            "titulo": "Missa",
             "ano": "1807",
             "efectivo_vocal": "TTBB conc. (Dó4",
             "efectivo_orgao": "4org",
@@ -3012,12 +3012,12 @@
         },
         "tonalidade": {
             "nota": "Ré",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 18,
             "obm": "02-04",
-            "titulo": "Responsórios de 5ª feita Santa",
+            "titulo": "Responsórios de 5ª Feita Santa",
             "ano": "1807",
             "efectivo_vocal": "TTBB (conc.)",
             "efectivo_orgao": "6org",
@@ -3258,7 +3258,7 @@
         },
         "tonalidade": {
             "nota": "Si♭",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 19,
@@ -4235,7 +4235,7 @@
         "obra": {
             "id": 22,
             "obm": "02-08",
-            "titulo": "Confitebor tibi Domine",
+            "titulo": "Confitebor Tibi Domine",
             "ano": "1806",
             "efectivo_vocal": "BBBB (Fá4",
             "efectivo_orgao": "5org",
@@ -4446,7 +4446,7 @@
         },
         "tonalidade": {
             "nota": "Lá",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 23,
@@ -4918,7 +4918,7 @@
         "obra": {
             "id": 25,
             "obm": "02-11",
-            "titulo": "Domine Probasti me",
+            "titulo": "Domine Probasti Me",
             "ano": "1807",
             "efectivo_vocal": "TTBB",
             "efectivo_orgao": "6org",
@@ -5178,7 +5178,7 @@
         "obra": {
             "id": 26,
             "obm": "02-11",
-            "titulo": "Domine Probasti me",
+            "titulo": "Domine Probasti Me",
             "ano": "1807",
             "efectivo_vocal": "TTBB",
             "efectivo_orgao": "6org",
@@ -5461,7 +5461,7 @@
         },
         "tonalidade": {
             "nota": "Ré",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 27,
@@ -6566,7 +6566,7 @@
         },
         "tonalidade": {
             "nota": "Lá",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 32,
@@ -7120,8 +7120,8 @@
             "nome": "João José"
         },
         "tonalidade": {
-            "nota": null,
-            "modo": null
+            "nota": "Dó",
+            "modo": "menor"
         },
         "obra": {
             "id": 34,
@@ -7763,7 +7763,7 @@
         "obra": {
             "id": 37,
             "obm": "02-21",
-            "titulo": "Sonata em Dó Maior",
+            "titulo": "Sonata",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "6?org",
@@ -7905,7 +7905,7 @@
         "obra": {
             "id": 38,
             "obm": "02-22",
-            "titulo": "Sonata em Ré Maior",
+            "titulo": "Sonata",
             "ano": "1807",
             "efectivo_vocal": null,
             "efectivo_orgao": "4org?",
@@ -7966,7 +7966,7 @@
         "obra": {
             "id": 39,
             "obm": "03-01",
-            "titulo": "Missa em Fá Maior",
+            "titulo": "Missa",
             "ano": "1795",
             "efectivo_vocal": null,
             "efectivo_orgao": null,
@@ -8476,7 +8476,7 @@
         },
         "tonalidade": {
             "nota": "Ré",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 41,
@@ -8695,7 +8695,7 @@
         "obra": {
             "id": 42,
             "obm": "05-01",
-            "titulo": "Missa em Ré Maior",
+            "titulo": "Missa",
             "ano": "0",
             "efectivo_vocal": "B",
             "efectivo_orgao": "4org",
@@ -8902,7 +8902,7 @@
         "obra": {
             "id": 43,
             "obm": "05-02",
-            "titulo": "Missa em Mib Maior",
+            "titulo": "Missa",
             "ano": "1807",
             "efectivo_vocal": "TT (Dó4",
             "efectivo_orgao": "4 órg",
@@ -9186,7 +9186,7 @@
         "obra": {
             "id": 44,
             "obm": "05-03",
-            "titulo": "Ofício de defunto",
+            "titulo": "Ofício de Defunto",
             "ano": "1813",
             "efectivo_vocal": null,
             "efectivo_orgao": "2org",
@@ -10271,12 +10271,12 @@
         },
         "tonalidade": {
             "nota": "Ré",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 47,
             "obm": "06-01",
-            "titulo": "Sinfonia em Ré Maior",
+            "titulo": "Sinfonia",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "4org",
@@ -10428,7 +10428,7 @@
         "obra": {
             "id": 49,
             "obm": "08-01",
-            "titulo": "Sinfonia Ré M",
+            "titulo": "Sinfonia",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "4?org",
@@ -10518,7 +10518,7 @@
         "obra": {
             "id": 50,
             "obm": "08-02",
-            "titulo": "Sinfonia Ré M",
+            "titulo": "Sinfonia",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "4?org",
@@ -10617,12 +10617,12 @@
         },
         "tonalidade": {
             "nota": "Ré",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 51,
             "obm": "09-02",
-            "titulo": "Sinfonia em Ré M",
+            "titulo": "Sinfonia",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "5org",
@@ -10861,12 +10861,12 @@
         },
         "tonalidade": {
             "nota": "Fá",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 52,
             "obm": "09-01",
-            "titulo": "Sonata em Fá M",
+            "titulo": "Sonata",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "5org",
@@ -11489,7 +11489,7 @@
         "obra": {
             "id": 55,
             "obm": "12-01",
-            "titulo": "Missa em Ré M",
+            "titulo": "Missa",
             "ano": "0",
             "efectivo_vocal": "BB",
             "efectivo_orgao": "4org",
@@ -11710,7 +11710,7 @@
         "obra": {
             "id": 56,
             "obm": "12-02",
-            "titulo": "Missa em Fá M",
+            "titulo": "Missa",
             "ano": "1798",
             "efectivo_vocal": "TTBB",
             "efectivo_orgao": "4 org",
@@ -11926,7 +11926,7 @@
         },
         "tonalidade": {
             "nota": "Ré",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 57,
@@ -12208,7 +12208,7 @@
         "obra": {
             "id": 58,
             "obm": "12-04",
-            "titulo": "Sonata em Dó M",
+            "titulo": "Sonata",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "4org",
@@ -12271,12 +12271,12 @@
         },
         "tonalidade": {
             "nota": "Dó",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 59,
             "obm": "13-01",
-            "titulo": "Missa em Dó M",
+            "titulo": "Missa",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "4org",
@@ -12731,12 +12731,12 @@
         },
         "tonalidade": {
             "nota": "Dó",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 61,
             "obm": "13-03",
-            "titulo": "Sinfonia em Dó M",
+            "titulo": "Sinfonia",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "6org",
@@ -12861,12 +12861,12 @@
         },
         "tonalidade": {
             "nota": "Ré",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 62,
             "obm": "14-01",
-            "titulo": "Sinfonia Ré M",
+            "titulo": "Sinfonia",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "6org",
@@ -13190,8 +13190,8 @@
             "nome": "António Leal"
         },
         "tonalidade": {
-            "nota": "Si",
-            "modo": "Maior"
+            "nota": null,
+            "modo": null
         },
         "obra": {
             "id": 63,
@@ -13764,7 +13764,7 @@
         "obra": {
             "id": 65,
             "obm": "15-02",
-            "titulo": "Missa PequenaV4",
+            "titulo": "Missa Pequenav4",
             "ano": "1807",
             "efectivo_vocal": null,
             "efectivo_orgao": "4org",
@@ -14794,12 +14794,12 @@
         },
         "tonalidade": {
             "nota": "Ré",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 69,
             "obm": "16-01",
-            "titulo": "Missa em Ré M",
+            "titulo": "Missa",
             "ano": "1802",
             "efectivo_vocal": "B (conc.)",
             "efectivo_orgao": "4org",
@@ -15402,7 +15402,7 @@
         },
         "tonalidade": {
             "nota": "Fá",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 72,
@@ -15702,7 +15702,7 @@
         },
         "tonalidade": {
             "nota": "Ré",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 73,
@@ -15918,12 +15918,12 @@
         },
         "tonalidade": {
             "nota": "Fá",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 74,
             "obm": "18-01",
-            "titulo": "Sonata em Fá M",
+            "titulo": "Sonata",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "4org",
@@ -16104,12 +16104,12 @@
         },
         "tonalidade": {
             "nota": "Sol",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 75,
             "obm": "18-02",
-            "titulo": "Sonata em Sol M",
+            "titulo": "Sonata",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "4org",
@@ -16172,12 +16172,12 @@
         },
         "tonalidade": {
             "nota": "Sol",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 76,
             "obm": "18-03",
-            "titulo": "Sonata em Sol Maior",
+            "titulo": "Sonata",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "4org",
@@ -16233,12 +16233,12 @@
         },
         "tonalidade": {
             "nota": "Dó",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 77,
             "obm": "19-01",
-            "titulo": "Missa em Dó Maior",
+            "titulo": "Missa",
             "ano": "0",
             "efectivo_vocal": "BBBB (conc.) (Fá4 x4)",
             "efectivo_orgao": "4org",
@@ -16648,7 +16648,7 @@
         "obra": {
             "id": 78,
             "obm": "19-02",
-            "titulo": "Missa Mib M",
+            "titulo": "Missa",
             "ano": "1807",
             "efectivo_vocal": "TTBB conc. 4org",
             "efectivo_orgao": "TTBB conc. 4org",
@@ -17085,7 +17085,7 @@
         },
         "tonalidade": {
             "nota": "Dó",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 79,
@@ -17113,7 +17113,7 @@
         "obra": {
             "id": 80,
             "obm": "19-16",
-            "titulo": "Beatus Vir Sib M",
+            "titulo": "Beatus Vir",
             "ano": "1807",
             "efectivo_vocal": "TTBB conc.",
             "efectivo_orgao": "6 org",
@@ -17506,7 +17506,7 @@
         "obra": {
             "id": 81,
             "obm": "19-16",
-            "titulo": "Beatus Vir Sib M",
+            "titulo": "Beatus Vir",
             "ano": "1819",
             "efectivo_vocal": "TTBB conc.",
             "efectivo_orgao": "6 org",
@@ -17595,7 +17595,7 @@
         "obra": {
             "id": 82,
             "obm": "XYZ",
-            "titulo": "Beatus Vir Sib    / 1826",
+            "titulo": "Beatus Vir Sib / 1826",
             "ano": "1807",
             "efectivo_vocal": "T, TTBB conc.",
             "efectivo_orgao": "6org",
@@ -17794,12 +17794,12 @@
         },
         "tonalidade": {
             "nota": "Mi♭",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 84,
             "obm": "19-18",
-            "titulo": "De Profundis Mib M",
+            "titulo": "De Profundis",
             "ano": "0",
             "efectivo_vocal": "TBBB conc.",
             "efectivo_orgao": "5org",
@@ -17968,12 +17968,12 @@
         },
         "tonalidade": {
             "nota": "Ré",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 85,
             "obm": "19-17",
-            "titulo": "De Profundis Ré M",
+            "titulo": "De Profundis",
             "ano": "1807",
             "efectivo_vocal": "TTBB conc.",
             "efectivo_orgao": "5org",
@@ -18203,7 +18203,7 @@
         "obra": {
             "id": 86,
             "obm": "19-20",
-            "titulo": "In exitu Israel",
+            "titulo": "In Exitu Israel",
             "ano": "0",
             "efectivo_vocal": "TBBB (Dó4",
             "efectivo_orgao": "5org?",
@@ -18342,7 +18342,7 @@
         },
         "tonalidade": {
             "nota": "Fá",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 87,
@@ -18564,8 +18564,8 @@
             "nome": "Marcos"
         },
         "tonalidade": {
-            "nota": null,
-            "modo": null
+            "nota": "Sol",
+            "modo": "menor"
         },
         "obra": {
             "id": 88,
@@ -18787,8 +18787,8 @@
             "nome": "Marcos"
         },
         "tonalidade": {
-            "nota": null,
-            "modo": null
+            "nota": "Sol",
+            "modo": "menor"
         },
         "obra": {
             "id": 89,
@@ -18942,7 +18942,7 @@
         },
         "tonalidade": {
             "nota": "Dó",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 90,
@@ -19526,7 +19526,7 @@
         "obra": {
             "id": 92,
             "obm": "19-24",
-            "titulo": "Magnificat em Sib M",
+            "titulo": "Magnificat",
             "ano": "1807",
             "efectivo_vocal": "TTBB",
             "efectivo_orgao": "6org",
@@ -19914,7 +19914,7 @@
         },
         "tonalidade": {
             "nota": "Dó",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 93,
@@ -20165,7 +20165,7 @@
         },
         "tonalidade": {
             "nota": "Dó",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 94,
@@ -21317,7 +21317,7 @@
         },
         "tonalidade": {
             "nota": "Dó",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 99,
@@ -21549,12 +21549,12 @@
         },
         "tonalidade": {
             "nota": "Dó",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 100,
             "obm": "19-25",
-            "titulo": "Memento Domine em Dó M",
+            "titulo": "Memento Domine",
             "ano": "0",
             "efectivo_vocal": "TTBB",
             "efectivo_orgao": "6org",
@@ -21728,7 +21728,7 @@
         "obra": {
             "id": 101,
             "obm": "19-05",
-            "titulo": "Missa breve em MibM",
+            "titulo": "Missa Breve",
             "ano": "1806",
             "efectivo_vocal": "BBBB",
             "efectivo_orgao": "5org",
@@ -22429,7 +22429,7 @@
         "obra": {
             "id": 104,
             "obm": "19-04",
-            "titulo": "Missa em Sol M",
+            "titulo": "Missa",
             "ano": "1806",
             "efectivo_vocal": "BBBBB conc., BBBB (Ecos)",
             "efectivo_orgao": "4org",
@@ -22741,7 +22741,7 @@
         "obra": {
             "id": 105,
             "obm": "19-04",
-            "titulo": "Missa em Sol M",
+            "titulo": "Missa",
             "ano": "1806",
             "efectivo_vocal": "BBBBB conc., BBBB (Ecos)",
             "efectivo_orgao": "4org",
@@ -22830,7 +22830,7 @@
         "obra": {
             "id": 106,
             "obm": "19-04",
-            "titulo": "Missa em Sol M",
+            "titulo": "Missa",
             "ano": "1806",
             "efectivo_vocal": "BBBBB conc., BBBB (Ecos)",
             "efectivo_orgao": "4org",
@@ -22869,7 +22869,7 @@
         "obra": {
             "id": 107,
             "obm": "19-06",
-            "titulo": "Missa Festiva Fá M",
+            "titulo": "Missa Festiva",
             "ano": "0",
             "efectivo_vocal": "TTBB conc. (Dó4",
             "efectivo_orgao": "4org",
@@ -23505,12 +23505,12 @@
         },
         "tonalidade": {
             "nota": "Si♭",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 108,
             "obm": "19-14",
-            "titulo": "Si quaeris",
+            "titulo": "Si Quaeris",
             "ano": "1807",
             "efectivo_vocal": "T, T, B, B, TTBB conc.",
             "efectivo_orgao": "6org",
@@ -23786,12 +23786,12 @@
         },
         "tonalidade": {
             "nota": "Ré",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 109,
             "obm": "19-36",
-            "titulo": "Sinfonia em Ré M",
+            "titulo": "Sinfonia",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "6org",
@@ -24144,12 +24144,12 @@
         },
         "tonalidade": {
             "nota": "Dó",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 110,
             "obm": "19-37",
-            "titulo": "Sonata em Dó M",
+            "titulo": "Sonata",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "4org?",
@@ -24433,7 +24433,7 @@
         },
         "tonalidade": {
             "nota": "Si♭",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 112,
@@ -24642,7 +24642,7 @@
         },
         "tonalidade": {
             "nota": "Dó",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 113,
@@ -24950,13 +24950,13 @@
             "nome": "Marcos"
         },
         "tonalidade": {
-            "nota": null,
-            "modo": null
+            "nota": "Ré",
+            "modo": "menor"
         },
         "obra": {
             "id": 114,
             "obm": "19-28",
-            "titulo": "Vésperas de S. Francisco em ré m",
+            "titulo": "Vésperas de S. Francisco",
             "ano": "1804",
             "efectivo_vocal": "BBBBB",
             "efectivo_orgao": "4org",
@@ -25142,7 +25142,7 @@
         "obra": {
             "id": 115,
             "obm": "19-27",
-            "titulo": "Vésperas de S. Francisco em Dó Maior",
+            "titulo": "Vésperas de S. Francisco",
             "ano": "1807",
             "efectivo_vocal": "TTBB conc.",
             "efectivo_orgao": "6org",
@@ -25703,7 +25703,7 @@
         "obra": {
             "id": 116,
             "obm": "19-19",
-            "titulo": "Dixit Dominus Dó M",
+            "titulo": "Dixit Dominus",
             "ano": "1807",
             "efectivo_vocal": "B, B, TTBB conc. (Dó4",
             "efectivo_orgao": "6org",
@@ -26520,7 +26520,7 @@
         },
         "tonalidade": {
             "nota": "Mi♭",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 119,
@@ -27098,8 +27098,8 @@
             "nome": "Simão"
         },
         "tonalidade": {
-            "nota": "Dó",
-            "modo": "menor"
+            "nota": null,
+            "modo": null
         },
         "obra": {
             "id": 121,
@@ -27562,7 +27562,7 @@
         },
         "tonalidade": {
             "nota": "Fá",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 122,
@@ -27871,12 +27871,12 @@
         },
         "tonalidade": {
             "nota": "Fá",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 123,
             "obm": "21-15",
-            "titulo": "Ascendo ad Patrem Nostrum",
+            "titulo": "Ascendo Ad Patrem Nostrum",
             "ano": "0",
             "efectivo_vocal": "TBBB (conc.?)",
             "efectivo_orgao": "5org",
@@ -28038,7 +28038,7 @@
         },
         "tonalidade": {
             "nota": "Mi♭",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 124,
@@ -28430,12 +28430,12 @@
         },
         "tonalidade": {
             "nota": "Dó",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 126,
             "obm": "21-09",
-            "titulo": "Haec dies",
+            "titulo": "Haec Dies",
             "ano": "1807",
             "efectivo_vocal": "TBBB (conc.)",
             "efectivo_orgao": "6org",
@@ -28625,7 +28625,7 @@
         },
         "tonalidade": {
             "nota": "Lá",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 127,
@@ -28871,12 +28871,12 @@
         },
         "tonalidade": {
             "nota": "Lá",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 128,
             "obm": "21-11",
-            "titulo": "Laetatus sum",
+            "titulo": "Laetatus Sum",
             "ano": "0",
             "efectivo_vocal": "T (Dó4), B (Fá4)",
             "efectivo_orgao": "5org",
@@ -29064,7 +29064,7 @@
         "obra": {
             "id": 129,
             "obm": "21-01",
-            "titulo": "Missa de canto figurado    / 1818",
+            "titulo": "Missa de Canto Figurado / 1818",
             "ano": "1804",
             "efectivo_vocal": "BBBB conc.",
             "efectivo_orgao": "4org",
@@ -29301,12 +29301,12 @@
         },
         "tonalidade": {
             "nota": "Dó",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 130,
             "obm": "21-02",
-            "titulo": "Missa em Dó M",
+            "titulo": "Missa",
             "ano": "1807",
             "efectivo_vocal": "TBBB (conc.?)",
             "efectivo_orgao": "6org",
@@ -29930,8 +29930,8 @@
             "nome": "António"
         },
         "tonalidade": {
-            "nota": null,
-            "modo": null
+            "nota": "Lá",
+            "modo": "menor"
         },
         "obra": {
             "id": 132,
@@ -30103,7 +30103,7 @@
         "obra": {
             "id": 133,
             "obm": "21-05",
-            "titulo": "Responsórios para a Festa de S. Pedro de Alcântara",
+            "titulo": "Responsórios Para a Festa de S. Pedro de Alcântara",
             "ano": "1805",
             "efectivo_vocal": null,
             "efectivo_orgao": "4org / 6org",
@@ -30354,12 +30354,12 @@
         },
         "tonalidade": {
             "nota": "Lá",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 134,
             "obm": "21-13",
-            "titulo": "Salmos para a Noa",
+            "titulo": "Salmos Para a Noa",
             "ano": "0",
             "efectivo_vocal": "TBBB",
             "efectivo_orgao": "5org",
@@ -30631,7 +30631,7 @@
         "obra": {
             "id": 135,
             "obm": "21-17",
-            "titulo": "Sinfonia em Sol menor",
+            "titulo": "Sinfonia em Sol Menor",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "4org",
@@ -30649,12 +30649,12 @@
         },
         "tonalidade": {
             "nota": "Ré",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 136,
             "obm": "21-18",
-            "titulo": "Sonata em Ré M",
+            "titulo": "Sonata",
             "ano": "1805",
             "efectivo_vocal": null,
             "efectivo_orgao": "4org",
@@ -31103,7 +31103,7 @@
         "obra": {
             "id": 138,
             "obm": "21-03",
-            "titulo": "Missa em Ré M",
+            "titulo": "Missa",
             "ano": "1806",
             "efectivo_vocal": "TBBB (ecos), TBBB, TBBB",
             "efectivo_orgao": "6org",
@@ -31498,7 +31498,7 @@
         },
         "tonalidade": {
             "nota": "Fá",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 140,
@@ -31947,12 +31947,12 @@
         },
         "tonalidade": {
             "nota": "Ré",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 141,
             "obm": "22-01",
-            "titulo": "Abertura da ópera Ipermestra\ts.d.",
+            "titulo": "Abertura da Ópera Ipermestra S.d.",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "4org",
@@ -32022,12 +32022,12 @@
         },
         "tonalidade": {
             "nota": "Ré",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 142,
             "obm": "23-01",
-            "titulo": "Sinfonia em Ré M",
+            "titulo": "Sinfonia",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "4org",
@@ -32088,7 +32088,7 @@
         "obra": {
             "id": 143,
             "obm": "24-01",
-            "titulo": "Abertura da ópera La Cerenentola",
+            "titulo": "Abertura da Ópera La Cerenentola",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "4org",
@@ -32288,7 +32288,7 @@
         "obra": {
             "id": 144,
             "obm": "25-01",
-            "titulo": "Missa de Cantochão figurado",
+            "titulo": "Missa de Cantochão Figurado",
             "ano": "1800",
             "efectivo_vocal": "BB conc.",
             "efectivo_orgao": "4org",
@@ -32748,13 +32748,13 @@
             "nome": "Luciano Xavier dos"
         },
         "tonalidade": {
-            "nota": "Dó",
-            "modo": "menor"
+            "nota": null,
+            "modo": null
         },
         "obra": {
             "id": 145,
             "obm": "26-01",
-            "titulo": "Ofício de Quinta feira santa",
+            "titulo": "Ofício de Quinta Feira Santa",
             "ano": "1805",
             "efectivo_vocal": "BB conc.",
             "efectivo_orgao": "4org",
@@ -32919,7 +32919,7 @@
         "obra": {
             "id": 146,
             "obm": "26-02",
-            "titulo": "Ofício de sábado Santo",
+            "titulo": "Ofício de Sábado Santo",
             "ano": "1805",
             "efectivo_vocal": "BB conc.",
             "efectivo_orgao": "4org",
@@ -33071,13 +33071,13 @@
             "nome": "Luciano Xavier dos"
         },
         "tonalidade": {
-            "nota": "Dó",
-            "modo": "menor"
+            "nota": null,
+            "modo": null
         },
         "obra": {
             "id": 147,
             "obm": "26-03",
-            "titulo": "Ofício de Sexta feira santa",
+            "titulo": "Ofício de Sexta Feira Santa",
             "ano": "1805",
             "efectivo_vocal": "BB conc.",
             "efectivo_orgao": "4org",
@@ -33229,13 +33229,13 @@
             "nome": "Frei José Marques e"
         },
         "tonalidade": {
-            "nota": null,
-            "modo": null
+            "nota": "Ré",
+            "modo": "Maior"
         },
         "obra": {
             "id": 148,
             "obm": "27-05",
-            "titulo": "Domine Probasti me",
+            "titulo": "Domine Probasti Me",
             "ano": "1815",
             "efectivo_vocal": "TTBB conc.",
             "efectivo_orgao": "2org",
@@ -33348,13 +33348,13 @@
             "nome": "Frei José Marques e"
         },
         "tonalidade": {
-            "nota": null,
-            "modo": null
+            "nota": "Lá",
+            "modo": "Maior"
         },
         "obra": {
             "id": 149,
             "obm": "27-06",
-            "titulo": "In exitu Israel",
+            "titulo": "In Exitu Israel",
             "ano": "1813",
             "efectivo_vocal": "TTBB conc.",
             "efectivo_orgao": "2org",
@@ -33460,8 +33460,8 @@
             "nome": "Frei José Marques e"
         },
         "tonalidade": {
-            "nota": null,
-            "modo": null
+            "nota": "Lá",
+            "modo": "Maior"
         },
         "obra": {
             "id": 150,
@@ -33544,8 +33544,8 @@
             "nome": "Frei José Marques e"
         },
         "tonalidade": {
-            "nota": null,
-            "modo": null
+            "nota": "Mi♭",
+            "modo": "Maior"
         },
         "obra": {
             "id": 151,
@@ -34236,13 +34236,13 @@
             "nome": "Frei José Marques e"
         },
         "tonalidade": {
-            "nota": null,
-            "modo": null
+            "nota": "Dó",
+            "modo": "Maior"
         },
         "obra": {
             "id": 153,
             "obm": "27-09",
-            "titulo": "Te Deum em Dó M",
+            "titulo": "Te Deum",
             "ano": "1811",
             "efectivo_vocal": null,
             "efectivo_orgao": "2org",
@@ -34362,13 +34362,13 @@
             "nome": "Frei José Marques e"
         },
         "tonalidade": {
-            "nota": null,
-            "modo": null
+            "nota": "Dó",
+            "modo": "Maior"
         },
         "obra": {
             "id": 154,
             "obm": "27-10",
-            "titulo": "Te Deum em Dó M",
+            "titulo": "Te Deum",
             "ano": "1812",
             "efectivo_vocal": "Coro - TTBB conc.",
             "efectivo_orgao": "2org",
@@ -34749,13 +34749,13 @@
             "nome": "Frei José Marques e"
         },
         "tonalidade": {
-            "nota": null,
-            "modo": null
+            "nota": "Lá",
+            "modo": "menor"
         },
         "obra": {
             "id": 156,
             "obm": "27-04",
-            "titulo": "Confitebor tibi",
+            "titulo": "Confitebor Tibi",
             "ano": "1817",
             "efectivo_vocal": "TTBB conc.",
             "efectivo_orgao": "2org",
@@ -34875,13 +34875,13 @@
             "nome": "Frei José Marques e"
         },
         "tonalidade": {
-            "nota": null,
-            "modo": null
+            "nota": "Mi",
+            "modo": "Maior"
         },
         "obra": {
             "id": 157,
             "obm": "27-01",
-            "titulo": "Laudamus te",
+            "titulo": "Laudamus Te",
             "ano": "0",
             "efectivo_vocal": "TTBB conc.",
             "efectivo_orgao": "2org",
@@ -36010,7 +36010,7 @@
         "obra": {
             "id": 163,
             "obm": "28-08",
-            "titulo": "Sinfonia 1ª em Ré Maior",
+            "titulo": "Sinfonia 1ª",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": null,
@@ -36287,7 +36287,7 @@
         "obra": {
             "id": 164,
             "obm": "28-09",
-            "titulo": "Sinfonia em Ré Maior 6 órgãos",
+            "titulo": "Sinfonia em Ré Maior 6 Órgãos",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "6org",
@@ -36561,7 +36561,7 @@
         "obra": {
             "id": 165,
             "obm": "28-09",
-            "titulo": "Sinfonia em Ré Maior 6 órgãos",
+            "titulo": "Sinfonia em Ré Maior 6 Órgãos",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "6org",
@@ -36763,12 +36763,12 @@
         },
         "tonalidade": {
             "nota": "Dó",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 166,
             "obm": "28-05",
-            "titulo": "Te DeumI Dó Maior",
+            "titulo": "Te Deumi",
             "ano": "1807",
             "efectivo_vocal": "TTBB conc.",
             "efectivo_orgao": "6org",
@@ -37058,12 +37058,12 @@
         },
         "tonalidade": {
             "nota": "Dó",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 167,
             "obm": "28-04",
-            "titulo": "Te Deum2 Dó Maior",
+            "titulo": "Te Deum2",
             "ano": "1821",
             "efectivo_vocal": "TTBB",
             "efectivo_orgao": "2org",
@@ -37081,12 +37081,12 @@
         },
         "tonalidade": {
             "nota": "Ré",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 168,
             "obm": "28-06",
-            "titulo": "Te Deum em Ré M",
+            "titulo": "Te Deum",
             "ano": "1814",
             "efectivo_vocal": "TTBB conc.",
             "efectivo_orgao": "2org",
@@ -37282,7 +37282,7 @@
         "obra": {
             "id": 169,
             "obm": "29-01",
-            "titulo": "Confitebor tibi",
+            "titulo": "Confitebor Tibi",
             "ano": "1825",
             "efectivo_vocal": "A (Dó3), TTBB (coro - Dó4, TTB (coro de ecos - Dó4",
             "efectivo_orgao": "5org",
@@ -37667,8 +37667,8 @@
             "nome": "Fr. João"
         },
         "tonalidade": {
-            "nota": null,
-            "modo": null
+            "nota": "Lá",
+            "modo": "menor"
         },
         "obra": {
             "id": 170,
@@ -38083,7 +38083,7 @@
         "obra": {
             "id": 172,
             "obm": "29-06",
-            "titulo": "HINOS DA FESTA DA NATIVIDADE Sib M",
+            "titulo": "Hinos da Festa da Natividade",
             "ano": "0",
             "efectivo_vocal": "TTBB",
             "efectivo_orgao": "4org",
@@ -38243,7 +38243,7 @@
         },
         "tonalidade": {
             "nota": "Sol",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 173,
@@ -38407,8 +38407,8 @@
             "nome": "Fr. João da"
         },
         "tonalidade": {
-            "nota": "Sol",
-            "modo": "Maior"
+            "nota": null,
+            "modo": null
         },
         "obra": {
             "id": 174,
@@ -38834,7 +38834,7 @@
         "obra": {
             "id": 176,
             "obm": "29-03",
-            "titulo": "In convertendo Dominus",
+            "titulo": "In Convertendo Dominus",
             "ano": "1815",
             "efectivo_vocal": "TTBB",
             "efectivo_orgao": "2org",
@@ -39203,8 +39203,8 @@
             "nome": "Fr. João da"
         },
         "tonalidade": {
-            "nota": null,
-            "modo": null
+            "nota": "Sol",
+            "modo": "menor"
         },
         "obra": {
             "id": 178,
@@ -39365,7 +39365,7 @@
         },
         "tonalidade": {
             "nota": "Dó",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 179,
@@ -39792,7 +39792,7 @@
         "obra": {
             "id": 181,
             "obm": "29-13",
-            "titulo": "Tota pulchra es\t\ts.d.",
+            "titulo": "Tota Pulchra Es S.d.",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "2org",
@@ -40062,7 +40062,7 @@
         "obra": {
             "id": 183,
             "obm": "30-02",
-            "titulo": "Sinfonia em Dó maior",
+            "titulo": "Sinfonia em Dó Maior",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": null,
@@ -40085,7 +40085,7 @@
         "obra": {
             "id": 184,
             "obm": "32-01",
-            "titulo": "Sinfonia em Ré M",
+            "titulo": "Sinfonia",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "4org",
@@ -40163,12 +40163,12 @@
         },
         "tonalidade": {
             "nota": "Dó",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 185,
             "obm": "33-01",
-            "titulo": "Abertura da ópera Julieta e Romeo",
+            "titulo": "Abertura da Ópera Julieta e Romeo",
             "ano": "0",
             "efectivo_vocal": null,
             "efectivo_orgao": "4org",
@@ -40282,8 +40282,8 @@
             "nome": null
         },
         "tonalidade": {
-            "nota": "Dó",
-            "modo": "Maior"
+            "nota": null,
+            "modo": null
         },
         "obra": {
             "id": 186,
@@ -40683,7 +40683,7 @@
         },
         "tonalidade": {
             "nota": "Mi♭",
-            "modo": "menor"
+            "modo": "Maior"
         },
         "obra": {
             "id": 188,
@@ -41039,7 +41039,7 @@
         "obra": {
             "id": 190,
             "obm": "31-01",
-            "titulo": "Quem vidistis pastores",
+            "titulo": "Quem Vidistis Pastores",
             "ano": "1812",
             "efectivo_vocal": "TTBB (Dó4",
             "efectivo_orgao": "2org / 4org",

@@ -14,6 +14,85 @@ def format_mb(value):
     return f"{value / (1024 * 1024):.2f} MB"
 
 
+def save_optimized_image(img, path, extension, quality):
+    if extension in {".jpg", ".jpeg"}:
+        work = img.convert("RGB")
+        work.save(path, format="JPEG", quality=quality, optimize=True, progressive=True)
+        return
+
+    if extension == ".png":
+        if img.mode not in {"P", "L", "LA", "RGBA"}:
+            work = img.convert("RGB").quantize(colors=256)
+        else:
+            work = img
+        work.save(path, format="PNG", optimize=True, compress_level=9)
+        return
+
+    if extension == ".webp":
+        work = img.convert("RGB") if img.mode not in {"RGB", "RGBA"} else img
+        work.save(path, format="WEBP", quality=quality, method=6)
+        return
+
+    raise ValueError(f"Extensão não suportada: {extension}")
+
+
+def optimize_image_copy(source_path, destination_path, width, quality):
+    extension = source_path.suffix.lower()
+    if extension not in SUPPORTED_EXTENSIONS:
+        raise ValueError(f"Extensão não suportada: {extension}")
+
+    destination_path.parent.mkdir(parents=True, exist_ok=True)
+
+    with Image.open(source_path) as img:
+        img = ImageOps.exif_transpose(img)
+
+        resized = False
+        if img.width > width:
+            new_height = max(1, int(round(img.height * (width / img.width))))
+            img = img.resize((width, new_height), Image.Resampling.LANCZOS)
+            resized = True
+
+        with tempfile.NamedTemporaryFile(delete=False, suffix=extension) as temp_file:
+            temp_path = Path(temp_file.name)
+
+        try:
+            save_optimized_image(img=img, path=temp_path, extension=extension, quality=quality)
+            optimized_size = temp_path.stat().st_size
+            original_size = source_path.stat().st_size
+            should_use_optimized = resized or optimized_size < original_size
+
+            if should_use_optimized:
+                shutil.move(str(temp_path), str(destination_path))
+                return resized, optimized_size, True
+
+            shutil.copy2(source_path, destination_path)
+            return resized, destination_path.stat().st_size, False
+        finally:
+            if temp_path.exists():
+                temp_path.unlink()
+
+
+def copytree_optimized(source_dir, destination_dir, width, quality):
+    if destination_dir.exists():
+        shutil.rmtree(destination_dir)
+    destination_dir.mkdir(parents=True, exist_ok=True)
+
+    for path in source_dir.rglob("*"):
+        relative_path = path.relative_to(source_dir)
+        destination_path = destination_dir / relative_path
+
+        if path.is_dir():
+            destination_path.mkdir(parents=True, exist_ok=True)
+            continue
+
+        if path.suffix.lower() in SUPPORTED_EXTENSIONS:
+            optimize_image_copy(path, destination_path, width=width, quality=quality)
+            continue
+
+        destination_path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(path, destination_path)
+
+
 class Command(BaseCommand):
     help = "Redimensiona e otimiza imagens extraídas do catálogo para uso web."
 
@@ -131,7 +210,7 @@ class Command(BaseCommand):
                 temp_path = Path(temp_file.name)
 
             try:
-                self._save_optimized(img=img, path=temp_path, extension=extension, quality=quality)
+                save_optimized_image(img=img, path=temp_path, extension=extension, quality=quality)
                 new_size = temp_path.stat().st_size
 
                 original_size = image_path.stat().st_size
@@ -143,24 +222,3 @@ class Command(BaseCommand):
             finally:
                 if temp_path.exists():
                     temp_path.unlink()
-
-    def _save_optimized(self, img, path, extension, quality):
-        if extension in {".jpg", ".jpeg"}:
-            work = img.convert("RGB")
-            work.save(path, format="JPEG", quality=quality, optimize=True, progressive=True)
-            return
-
-        if extension == ".png":
-            if img.mode not in {"P", "L", "LA", "RGBA"}:
-                work = img.convert("RGB").quantize(colors=256)
-            else:
-                work = img
-            work.save(path, format="PNG", optimize=True, compress_level=9)
-            return
-
-        if extension == ".webp":
-            work = img.convert("RGB") if img.mode not in {"RGB", "RGBA"} else img
-            work.save(path, format="WEBP", quality=quality, method=6)
-            return
-
-        raise ValueError(f"Extensão não suportada: {extension}")

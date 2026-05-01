@@ -15,6 +15,7 @@ from django.db import transaction
 from django.utils.text import slugify
 
 from obras.models import Obra
+from obras.management.commands.optimize_catalog_images import copytree_optimized
 
 CODE_PATTERN = re.compile(r"\b\d{2}-\d{2}\b")
 
@@ -190,6 +191,7 @@ class Command(BaseCommand):
                 pandoc_bin=pandoc_path,
                 media_subdir=media_subdir,
                 dry_run=dry_run,
+                image_width=image_width,
             )
 
             if not secoes:
@@ -213,10 +215,6 @@ class Command(BaseCommand):
                     obra.info_catalogo = updates[obra.id]
                 Obra.objects.bulk_update(obras, ["info_catalogo"])
 
-        if not dry_run and image_width > 0:
-            self.stdout.write("A otimizar imagens do catálogo...")
-            call_command("optimize_catalog_images", source_dir=media_subdir, width=image_width)
-
         self.stdout.write(self.style.SUCCESS(f"Secções preparadas: {len(updates)}"))
         if dry_run:
             self.stdout.write(self.style.WARNING("Dry-run: nenhuma alteração foi gravada."))
@@ -227,7 +225,7 @@ class Command(BaseCommand):
                 )
             )
 
-    def _processar_docx(self, docx_file, pandoc_bin, media_subdir, dry_run):
+    def _processar_docx(self, docx_file, pandoc_bin, media_subdir, dry_run, image_width):
         with tempfile.TemporaryDirectory(prefix="catalogo_") as temp_dir:
             temp_path = Path(temp_dir)
             docx_limpo = temp_path / f"{docx_file.stem}_limpo.docx"
@@ -257,9 +255,17 @@ class Command(BaseCommand):
             if imagens_dir.exists():
                 if not dry_run:
                     destino_media = Path(settings.MEDIA_ROOT) / media_subdir / ficheiro_subdir
-                    if destino_media.exists():
-                        shutil.rmtree(destino_media)
-                    shutil.copytree(imagens_dir, destino_media)
+                    if image_width > 0:
+                        copytree_optimized(
+                            imagens_dir,
+                            destino_media,
+                            width=image_width,
+                            quality=82,
+                        )
+                    else:
+                        if destino_media.exists():
+                            shutil.rmtree(destino_media)
+                        shutil.copytree(imagens_dir, destino_media)
 
                 html = reescrever_referencias_media(
                     html=html,

@@ -1,13 +1,16 @@
 import os
-import django
 import json
+from pathlib import Path
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
-django.setup()
+if not os.environ.get("DJANGO_SETTINGS_MODULE"):
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
+
+import django
+
+if not django.apps.apps.ready:
+    django.setup()
 
 from django.conf import settings
-from django.core.management import call_command
-from django.core.management.base import CommandError
 
 from obras.models import (
     Compositor, Genero, Nota, Modo, Tonalidade,
@@ -15,9 +18,16 @@ from obras.models import (
 )
 
 
-def carregar_json(ficheiro="auxiliar/short.json"):
+DEFAULT_JSON_FILE = Path("auxiliar") / "short.json"
 
-    with open(ficheiro, encoding="utf8") as f:
+
+def carregar_json(ficheiro=DEFAULT_JSON_FILE, stdout=None):
+
+    ficheiro_path = Path(ficheiro)
+    if not ficheiro_path.is_absolute():
+        ficheiro_path = Path(settings.BASE_DIR) / ficheiro_path
+
+    with ficheiro_path.open(encoding="utf8") as f:
         dados = json.load(f)
 
     # caches para evitar queries repetidas
@@ -204,17 +214,13 @@ def carregar_json(ficheiro="auxiliar/short.json"):
                     ordem=reg["ordem"]
                 )
 
-    print("Importação concluída:", len(dados), "obras")
-
-    # Só otimiza quando já existem imagens extraídas em MEDIA_ROOT/catalogo.
-    catalogo_media_dir = settings.MEDIA_ROOT / "catalogo"
-    if catalogo_media_dir.exists():
-        try:
-            call_command("optimize_catalog_images", width=800)
-        except CommandError as exc:
-            print("Aviso ao otimizar imagens:", exc)
+    mensagem = f"Importação concluída: {len(dados)} obras"
+    if stdout is not None:
+        stdout.write(mensagem)
     else:
-        print("Otimização de imagens ignorada: sem imagens em", catalogo_media_dir)
+        print(mensagem)
+
+    return len(dados)
 
 
 if __name__ == "__main__":
