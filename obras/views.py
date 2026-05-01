@@ -100,7 +100,7 @@ def pesquisa_view(request):
             num_orgaos=Count("orgaos", distinct=True),
             num_registacoes=Count("orgaos__registacoes", distinct=True),
         )
-        .order_by("codigo")
+        .order_by("obm")
     )
 
     if titulo:
