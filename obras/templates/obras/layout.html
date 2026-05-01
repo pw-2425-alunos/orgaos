@@ -343,7 +343,7 @@
 
 
         <nav class="nav">
-            <a href="{% url 'landing' %}" {% if request.resolver_match.url_name == 'landing' %} class="is-active" {% endif%}>Início</a>
+            <a href="{% url 'landing' %}" {% if request.resolver_match.url_name == 'landing' %} class="is-active" {% endif%}><i class="fa-solid fa-house" style="padding-right:5px;"></i> Início</a>
             <a href="{% url 'pesquisa' %}" {% if request.resolver_match.url_name == 'pesquisa' %} class="is-active" {% endif %}><i class="fa-solid fa-book-open" style="padding-right:5px;"></i> Catálogo</a>
             <a href="{% url 'compositores' %}" {% if request.resolver_match.url_name == 'compositores' or request.resolver_match.url_name == 'compositor' %} class="is-active" {% endif %}><i class="fa-solid fa-users" style="padding-right:5px;"></i> Compositores</a>
             <a href="{% url 'sobre' %}" {% if request.resolver_match.url_name == 'sobre' %} class="is-active" {% endif %}><i class="fa-solid fa-circle-info" style="padding-right:5px;"></i> Sobre</a>
