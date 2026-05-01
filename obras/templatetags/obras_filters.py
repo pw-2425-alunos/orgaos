@@ -1,5 +1,6 @@
 import re
 from django import template
+from django.conf import settings
 
 register = template.Library()
 
@@ -29,3 +30,28 @@ def format_orgaos(value):
         return f"{num} órgãos"
     
     return value
+
+
+@register.filter
+def normalize_catalog_media_urls(value):
+    """
+    Rewrites legacy absolute /media/ links saved in catalog HTML to the current MEDIA_URL.
+    This keeps old imported content working when the app is mounted under a URL prefix (e.g. /web).
+    """
+    if not value:
+        return value
+
+    html = str(value)
+    media_url = getattr(settings, "MEDIA_URL", "/media/") or "/media/"
+
+    if media_url == "/media/":
+        return html
+
+    media_url = media_url if media_url.endswith("/") else f"{media_url}/"
+
+    return re.sub(
+        r'((?:src|href)\s*=\s*["\'])/media/',
+        rf'\1{media_url}',
+        html,
+        flags=re.IGNORECASE,
+    )

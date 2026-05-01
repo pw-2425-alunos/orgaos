@@ -133,7 +133,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/'
+# Optional URL prefix when app is mounted under a subpath in production (e.g. /web).
+URL_PREFIX = env("URL_PREFIX", default="").strip()
+if URL_PREFIX:
+    if not URL_PREFIX.startswith("/"):
+        URL_PREFIX = f"/{URL_PREFIX}"
+    URL_PREFIX = URL_PREFIX.rstrip("/")
+
+STATIC_URL = f'{URL_PREFIX}/static/' if URL_PREFIX else '/static/'
 STATIC_ROOT = os.getenv(
     "STATIC_ROOT",
      str(BASE_DIR / "staticfiles")
@@ -149,7 +156,7 @@ STORAGES = {
     },
 }
 
-MEDIA_URL = '/media/'
+MEDIA_URL = f'{URL_PREFIX}/media/' if URL_PREFIX else '/media/'
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
 # Default primary key field type

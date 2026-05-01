@@ -106,6 +106,11 @@ python manage.py import_catalogo_info --clear
 * Os dois comandos podem ser reexecutados sempre que houver alterações nos ficheiros Word.
 * Ambos mostram no terminal os códigos sem correspondência na BD.
 * O comando de catálogo serve imagens por `MEDIA_URL` (pasta persistente em `MEDIA_ROOT`).
+* Se a app estiver montada num subpath (ex.: `/web`), definir no `.env`:
+   ```env
+   URL_PREFIX=/web
+   ```
+   Isto ajusta automaticamente `STATIC_URL` e `MEDIA_URL` para `/web/static/` e `/web/media/`.
 
 ## Troubleshooting
 
