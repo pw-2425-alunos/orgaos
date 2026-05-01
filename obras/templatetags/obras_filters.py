@@ -33,7 +33,7 @@ def format_orgaos(value):
 
 
 @register.filter
-def normalize_catalog_media_urls(value):
+def normalize_catalog_media_urls(value, request=None):
     """
     Rewrites legacy absolute /media/ links saved in catalog HTML to the current MEDIA_URL.
     This keeps old imported content working when the app is mounted under a URL prefix (e.g. /web).
@@ -43,11 +43,23 @@ def normalize_catalog_media_urls(value):
 
     html = str(value)
     media_url = getattr(settings, "MEDIA_URL", "/media/") or "/media/"
+    media_url = media_url if media_url.endswith("/") else f"{media_url}/"
+
+    # If Django is mounted under a prefix (e.g. /web) and MEDIA_URL is still /media/,
+    # infer the prefix from request.path vs request.path_info.
+    if request is not None:
+        request_path = getattr(request, "path", "") or ""
+        path_info = getattr(request, "path_info", "") or ""
+        script_prefix = ""
+
+        if path_info and request_path.endswith(path_info):
+            script_prefix = request_path[: len(request_path) - len(path_info)]
+
+        if script_prefix and media_url.startswith("/") and not media_url.startswith(f"{script_prefix}/"):
+            media_url = f"{script_prefix}{media_url}"
 
     if media_url == "/media/":
         return html
-
-    media_url = media_url if media_url.endswith("/") else f"{media_url}/"
 
     return re.sub(
         r'((?:src|href)\s*=\s*["\'])/media/',

@@ -117,7 +117,7 @@
         {% if obra.info_catalogo %}
         <article class="card card-full" style="animation-delay: 340ms;">
             <h2>Informação Adicional</h2>
-            <div class="text-paragraph catalogo-html">{{ obra.info_catalogo|normalize_catalog_media_urls|safe }}</div>
+            <div class="text-paragraph catalogo-html">{{ obra.info_catalogo|normalize_catalog_media_urls:request|safe }}</div>
         </article>
         {% endif %}
     </section>
