@@ -38,7 +38,7 @@
                 <p><strong>Tonalidade</strong> {{ obra.tonalidade|default:"-" }}</p>
                 <p><strong>Efectivo Vocal</strong> {{ obra.efectivo_vocal|default:"-" }}</p>
                 <p><strong>Efectivo do Orgão</strong> {{ obra.efectivo_orgao|format_orgaos|default:"-" }}</p>
-                <p><strong>Descrição física</strong> {{ obra.descricao_fisica|default:"-" }}</p>
+                <p><strong>Descrição física</strong> {{ obra.descricao_fisica|autolink_text|default:"-" }}</p>
                 <p><strong>Onomástica de solistas</strong> {{ obra.onomastica|default:"-" }}</p>
                 <p><strong>Observações</strong> {{ obra.observacoes|default:"-" }}</p>
 
@@ -111,7 +111,15 @@
         <article class="card card-full" style="animation-delay: 270ms;">
             <!-- <div class="kicker">Referências</div> -->
             <h2>Referências</h2>
-            <p class="text-paragraph">{{ obra.referencias|default:"Sem referências cadastradas." }}</p>
+            {% if obra.referencias %}
+                <ol class="text-paragraph">
+                    {% for referencia in obra.referencias|split_referencias %}
+                        <li>{{ referencia|autolink_text }}</li>
+                    {% endfor %}
+                </ol>
+            {% else %}
+                <p class="text-paragraph">Sem referências cadastradas.</p>
+            {% endif %}
         </article>
 
         {% if obra.info_catalogo %}
