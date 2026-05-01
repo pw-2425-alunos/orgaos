@@ -11,8 +11,8 @@ from django.contrib.auth.models import User
 # Verificar se o utilizador admin já existe
 if not User.objects.filter(username='admin').exists():
     User.objects.create_user(
-        username='admin',
-        password='Admin6Orgaos'
+        username='org',
+        password='org26'
     )
     print("✓ Utilizador 'admin' criado com sucesso!")
 else:

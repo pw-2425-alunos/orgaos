@@ -7,13 +7,40 @@
    * eventualmente run pip install -r requirements.txt se houve novos packages 
    * dar restart da app
 
+
+
 # BD
 está independente em WebHS. mantém persistentes alterações que se façam
 
+sequencia de comandos:
+```parse
+auxiliar> python gera_json.py
+> python .\manage.py migrate
+> python .\carrega_obras.py
+> python manage.py import_catalogo_info --source-dir "C:\Users\lucio\Downloads\catalogacao\catalogacao"
+```
+
+# Processo ETL Excel -> BD
+
+Converter para JSON:
+```parse
+auxiliar>python gera_json.py
+```
+
+criar base de dados:
+```parse
+> python .\manage.py migrate
+```
+
+carregar obras:
+```parse
+> python .\carrega_obras.py
+```
 
 # Catalogo PDF / Word
 
-tenho varios ficheiros word nesta pasta. cada word é de um compositor. Para cada compositor:
+## Rationale
+Ha varios ficheiros word com info de obras. Para cada compositor:
 * limpar headers do word com o programa `auxiliar/limpa_headers_word.py`
 * converter word para HTML com `pandoc catalogo.docx -o catalogo.html --extract-media=imagens`
 * cada obra esta identificada pelo OBM na classe Obra. Esse codigo também está no word, marcando o inicio do conteúdo que quero extrair da obra, até ao proximo OBM.
@@ -45,23 +72,9 @@ tenho varios ficheiros word nesta pasta. cada word é de um compositor. Para cad
    python manage.py migrate
    ```
 
-### 1) ETL do OBM
+### 1) ETL do conteúdo HTML + imagens de cada obra
 
-Lê os DOCX em `auxiliar/catalogo`, extrai os códigos OBM e preenche `Obra.obm` com match por `Obra.codigo`.
-
-Teste sem gravar:
-```bash
-python manage.py import_obm_from_catalogo --dry-run
-```
-
-Execução real:
-```bash
-python manage.py import_obm_from_catalogo
-```
-
-### 2) ETL do conteúdo HTML + imagens
-
-Lê os DOCX em `auxiliar/catalogo`, extrai conteúdo por obra, guarda HTML em `Obra.info_catalogo` e imagens de forma persistente em `mediafiles/catalogo/...`.
+Lê os DOCX em `auxiliar/catalogo` (ou outra pasta a especificar), extrai conteúdo por obra, guarda HTML em `Obra.info_catalogo` e imagens de forma persistente em `mediafiles/catalogo/...`.
 
 Teste sem gravar:
 ```bash
@@ -73,16 +86,14 @@ Execução real:
 python manage.py import_catalogo_info
 ```
 
+Execução de outra pasta:
+```bash
+python manage.py import_catalogo_info --source-dir "C:\Users\lucio\Downloads\catalogacao\catalogacao"
+```
+
 Execução real limpando primeiro o campo `info_catalogo`:
 ```bash
 python manage.py import_catalogo_info --clear
-```
-
-### Ordem recomendada
-
-```bash
-python manage.py import_obm_from_catalogo
-python manage.py import_catalogo_info
 ```
 
 ### Notas

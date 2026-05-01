@@ -12,3 +12,6 @@ gunicorn
 django-ninja
 python-docx
 beautifulsoup4
+
+openpyxl
+pandas

@@ -5,6 +5,9 @@ import json
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
 django.setup()
 
+from django.core.management import call_command
+from django.core.management.base import CommandError
+
 from obras.models import (
     Compositor, Genero, Nota, Modo, Tonalidade,
     Obra, Extensao, Orgao, Registo, Registacao
@@ -97,6 +100,7 @@ def carregar_json(ficheiro="auxiliar/short.json"):
                 ano = None
 
         obra = Obra.objects.create(
+            obm=obra_data.get("obm") or "",
             titulo=obra_data["titulo"] or "",
             compositor=compositor,
             ano=ano,
@@ -129,7 +133,7 @@ def carregar_json(ficheiro="auxiliar/short.json"):
 
                 nota = notas_cache[nota_nome]
 
-                ext_inicio = Extensao.objects.create(
+                ext_inicio, _ = Extensao.objects.get_or_create(
                     nota=nota,
                     oitava=ei["oitava"],
                     tipo=ei["tipo"] or ""
@@ -149,7 +153,7 @@ def carregar_json(ficheiro="auxiliar/short.json"):
 
                 nota = notas_cache[nota_nome]
 
-                ext_fim = Extensao.objects.create(
+                ext_fim, _ = Extensao.objects.get_or_create(
                     nota=nota,
                     oitava=ef["oitava"],
                     tipo=ef["tipo"] or ""
@@ -200,6 +204,12 @@ def carregar_json(ficheiro="auxiliar/short.json"):
                 )
 
     print("Importação concluída:", len(dados), "obras")
+
+    # Redimensiona e otimiza as imagens do catálogo para largura máxima de 800px.
+    try:
+        call_command("optimize_catalog_images", width=800)
+    except CommandError as exc:
+        print("Aviso ao otimizar imagens:", exc)
 
 
 if __name__ == "__main__":

@@ -216,11 +216,13 @@ def ler_folha(df, id_obra):
         if chave:
             dados[chave] = valor
 
+    obm = dados.get("Código")
     compositor = parse_compositor(dados.get("Compositor"))
     nota, modo = parse_tonalidade(dados.get("Tonalidade"))
 
     obra = {
         "id": id_obra,
+        "obm": obm,
         "titulo": dados.get("Título"),
         "ano": dados.get("Ano"),
         "efectivo_vocal": dados.get("Efectivo Vocal"),
