@@ -6,7 +6,9 @@
 {% block content %}
     <section class="hero">
         <div class="kicker">Obra</div>
-        <h1 class="title"> {{ obra.obm }} · {{ obra.titulo }} em {{ obra.tonalidade }}, {{ obra.ano }} </h1>
+        <h1 class="title"> {{ obra.obm }} · {{ obra.titulo }} 
+            {% if obra.tonalidade %}em {{ obra.tonalidade }} {% endif %}
+            {% if obra.ano %}, {{ obra.ano }} {% endif %}</h1>
         <p class="subtitle">
             <a href="{% url 'compositor' obra.compositor.id %}">
             {{ obra.compositor.nome }} {{ obra.compositor.apelido }}{% if obra.compositor.info_cronologica %} ({{ obra.compositor.info_cronologica }}){% endif %}</a>  · 
