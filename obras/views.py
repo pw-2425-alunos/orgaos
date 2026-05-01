@@ -1,11 +1,12 @@
 import json
+import re
 import string
 import unicodedata
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.db.models import Case, Count, Q, Value, When
+from django.db.models import Case, Count, Exists, OuterRef, Q, Value, When
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import CompositorForm, ReferenciaFormSet
@@ -87,7 +88,8 @@ def pesquisa_view(request):
     compositor_id = request.GET.get("compositor", "").strip()
     genero_id = request.GET.get("genero", "").strip()
     num_orgaos = request.GET.get("num_orgaos", "").strip()
-    registos = request.GET.get("registos", "").strip()
+    registos_raw = request.GET.get("registos", "").strip()
+    apenas_registos = request.GET.get("apenas_registos") == "on"
     ano_inicio = request.GET.get("ano_inicio", "").strip()
     ano_fim = request.GET.get("ano_fim", "").strip()
     tonalidade_id = request.GET.get("tonalidade", "").strip()
@@ -116,12 +118,43 @@ def pesquisa_view(request):
         except ValueError:
             pass
 
+    registos = [reg.strip().lower() for reg in registos_raw.replace(",", " ").split() if reg.strip()]
+
     if registos:
-        obras = obras.filter(
-            Q(orgaos__registacoes__geral__nome__icontains=registos)
-            | Q(orgaos__registacoes__mao_esquerda__nome__icontains=registos)
-            | Q(orgaos__registacoes__mao_direita__nome__icontains=registos)
-        ).distinct()
+        if apenas_registos:
+            token_registo = r"(?:" + "|".join(re.escape(reg) for reg in registos) + r")"
+            padrao_registos = rf"^\s*{token_registo}(?:\s+{token_registo})*\s*$"
+            padrao_vazio = r"^\s*(?:-|—)?\s*$"
+            padrao_registos_ou_vazio = rf"(?:{padrao_registos})|(?:{padrao_vazio})"
+            registacoes_obra = Registacao.objects.filter(orgao__obra_id=OuterRef("pk"))
+            registo_permitido = (
+                Q(geral__nome__iregex=padrao_registos)
+                | Q(mao_esquerda__nome__iregex=padrao_registos)
+                | Q(mao_direita__nome__iregex=padrao_registos)
+            )
+            registo_nao_permitido = (
+                (Q(geral__isnull=False) & ~Q(geral__nome__iregex=padrao_registos_ou_vazio))
+                | (Q(mao_esquerda__isnull=False) & ~Q(mao_esquerda__nome__iregex=padrao_registos_ou_vazio))
+                | (Q(mao_direita__isnull=False) & ~Q(mao_direita__nome__iregex=padrao_registos_ou_vazio))
+            )
+
+            obras = obras.annotate(
+                tem_registo_permitido=Exists(registacoes_obra.filter(registo_permitido)),
+                tem_registo_nao_permitido=Exists(registacoes_obra.filter(registo_nao_permitido)),
+            ).filter(
+                tem_registo_permitido=True,
+                tem_registo_nao_permitido=False,
+            )
+        else:
+            for reg in registos:
+                filtro_registo = (
+                    Q(orgaos__registacoes__geral__nome__icontains=reg)
+                    | Q(orgaos__registacoes__mao_esquerda__nome__icontains=reg)
+                    | Q(orgaos__registacoes__mao_direita__nome__icontains=reg)
+                )
+                obras = obras.filter(filtro_registo)
+
+        obras = obras.distinct()
 
     if ano_inicio:
         try:
@@ -179,7 +212,8 @@ def pesquisa_view(request):
             "compositor": compositor_id,
             "genero": genero_id,
             "num_orgaos": num_orgaos,
-            "registos": registos,
+            "registos": registos_raw,
+            "apenas_registos": apenas_registos,
             "ano_inicio": ano_inicio,
             "ano_fim": ano_fim,
             "tonalidade": tonalidade_id,

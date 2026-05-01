@@ -6,13 +6,6 @@
     <section class="hero">
         <!-- <div class="kicker">Compositores</div> -->
         <h1>Compositores</h1>
-        <p class="subtitle">Percurso alfabético pelos compositores catalogados.</p>
-        {% if user.is_authenticated %}
-            <div class="actions-row">
-                <a class="back" href="{% url 'criar_compositor' %}">Criar compositor</a>
-            </div>
-        {% endif %}
-
     <section class="card">
         <div class="kicker">Navegação</div>
         <nav class="alphabet-nav" aria-label="Navegação por letra">
@@ -25,35 +18,40 @@
             {% endfor %}
         </nav>
 </section>
-
-    <section>
-        {% if grupos_compositores %}
-            <p class="results-meta">{{ compositores|length }} compositores</p>
-            <div class="composer-groups">
-                {% for grupo in grupos_compositores %}
-                    <section class="composer-group" id="letra-{{ grupo.letra }}">
-                        <h3 class="group-title">{{ grupo.letra }}</h3>
-                        <ul class="list">
-                            {% for compositor in grupo.itens %}
-                                <li class="item">
-                                    <a href="{% url 'compositor' compositor.id %}">
-                                        <span style="font-weight: 700;">{{ compositor.apelido }}</span>,
-                                        {{ compositor.nome }}
-                                        {% if compositor.info_cronologica %}
-                                            <span class="composer-inline-meta">({{ compositor.info_cronologica }})</span>
-                                        {% endif %}
-
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </section>
-                {% endfor %}
+{% if user.is_authenticated %}
+            <div class="actions-row">
+                <a class="back" href="{% url 'criar_compositor' %}"><i class="fa-solid fa-circle-plus"></i> Criar compositor</a>
             </div>
-        {% else %}
-            <p class="empty">Nenhum compositor cadastrado.</p>
         {% endif %}
-    </section>
+</section>
+    <section class="hero" style="margin-top: 20px;">
+            {% if grupos_compositores %}
+                <p class="results-meta" style="font-style:italic;"><i class="fa-solid fa-users"></i> {{ compositores|length }} compositores</p>
+                <div class="composer-groups">
+                    {% for grupo in grupos_compositores %}
+                        <section class="composer-group" id="letra-{{ grupo.letra }}">
+                            <h3 class="group-title">{{ grupo.letra }}</h3>
+                            <ul class="list">
+                                {% for compositor in grupo.itens %}
+                                    <li class="item">
+                                        <a href="{% url 'compositor' compositor.id %}">
+                                            <span style="font-weight: 700;">{{ compositor.apelido }}</span>,
+                                            {{ compositor.nome }}
+                                            {% if compositor.info_cronologica %}
+                                                <span class="composer-inline-meta">({{ compositor.info_cronologica }})</span>
+                                            {% endif %}
+
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </section>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="empty">Nenhum compositor cadastrado.</p>
+            {% endif %}
+
 </section>
 
     <a class="back" href="{% url 'landing' %}">Voltar para Início</a>

@@ -8,7 +8,7 @@
     <!-- <div class="kicker">Catálogo</div> -->
     <h1>Catálogo</h1>
     <p class="subtitle">Filtre por título, compositor, género, tonalidade, ano, número de órgãos e registos.</p>
-</section>
+
 
 <section class="card catalog-card">
     <form method="get" class="search-form">
@@ -56,14 +56,14 @@
             <div class="field">
                 <label for="ano_inicio">Ano (de)</label>
                 <input id="ano_inicio" type="number" min="1500" max="2100" name="ano_inicio"
-                    value="{{ filtros.ano_inicio }}" placeholder="Ex: 1762"
+                    value="{{ filtros.ano_inicio }}" placeholder="Ex: 1795"
                     class="{% if filtros.ano_inicio %}has-value{% endif %}">
             </div>
 
             <div class="field">
                 <label for="ano_fim">Ano (até)</label>
                 <input id="ano_fim" type="number" min="1500" max="2100" name="ano_fim" value="{{ filtros.ano_fim }}"
-                    placeholder="Ex: 1831" class="{% if filtros.ano_fim %}has-value{% endif %}">
+                    placeholder="Ex: 1826" class="{% if filtros.ano_fim %}has-value{% endif %}">
             </div>
 
             <div class="field">
@@ -71,21 +71,34 @@
                 <input id="num_orgaos" type="number" min="1" name="num_orgaos" value="{{ filtros.num_orgaos }}"
                     placeholder="Ex: 4" class="{% if filtros.num_orgaos %}has-value{% endif %}">
             </div>
-
+        </div>
+        <div class="field-registos">
             <div class="field">
-                <label for="registos">Registação</label>
+                <label for="registos">Registos</label>
                 <input id="registos" type="text" name="registos" value="{{ filtros.registos }}"
                     placeholder="Ex: Clarins, Cheio, Trombetinha" class="{% if filtros.registos %}has-value{% endif %}">
             </div>
-        </div>
+
+            <div class="field-checkbox">
+                <label for="apenas_registos">Só usa estes Registos</label>
+                <input id="apenas_registos" type="checkbox" name="apenas_registos" {% if filtros.apenas_registos %}checked{% endif %}>
+            </div>
+        </div>    
 
         <div class="actions-row">
-            <button type="submit" class="back"><i class="fa-solid fa-filter"></i> filtrar catálogo</button>
+            <button type="submit" class="back"><i class="fa-solid fa-filter"></i> pesquisar</button>
             <a class="back back-secondary" href="{% url 'pesquisa' %}"><i class="fa-solid fa-arrows-rotate"></i> limpar</a>
+                {% if user.is_authenticated %}
+            <a class="back back-secondary" href="{% url 'criar_obra' %}"><i class="fa-solid fa-circle-plus"></i> nova obra</a>
+    {% endif %}
+
         </div>
     </form>
+</section>
+</section>
 
-    <p class="results-meta">{{ obras|length }} obra{{ obras|length|pluralize }} encontrada{{ obras|length|pluralize }}
+<section  class="hero" style="margin-top: 20px;">
+        <p class="results-meta" style="font-style:italic;"><i class="fa-solid fa-book"></i> {{ obras|length }} obra{{ obras|length|pluralize }} encontrada{{ obras|length|pluralize }}
         com os filtros atuais.</p>
 
     {% if obras %}
@@ -96,7 +109,9 @@
                     <th>OBM</th>
                     <th>Título</th>
                     <th>Compositor</th>
+                    <th>Ano</th>
                     <th>Género</th>
+                    <th>Tonalidade</th>
                     <th>Órgãos</th>
                     <th>Registações</th>
                 </tr>
@@ -104,12 +119,14 @@
             <tbody>
                 {% for obra in obras %}
                 <tr onclick="window.location='{% url 'obra' obra.id %}'" style="cursor: pointer;">
-                    <td style="font-family: 'Courier New', monospace;">{{ obra.obm }}</td>
-                    <td style="font-weight:bold;">{{ obra.titulo }}</td>
-                    <td>{{ obra.compositor.nome }} {{ obra.compositor.apelido }}</td>
-                    <td>{{ obra.genero|default:"-" }}</td>
-                    <td>{{ obra.num_orgaos }}</td>
-                    <td>{{ obra.num_registacoes }}</td>
+                    <td data-label="OBM" style="font-family: 'Courier New', monospace;">{{ obra.obm }}</td>
+                    <td data-label="Título" style="font-weight:bold;">{{ obra.titulo }}</td>
+                    <td data-label="Compositor">{{ obra.compositor.nome }} {{ obra.compositor.apelido }}</td>
+                    <td data-label="Ano">{{ obra.ano|default:"-" }}</td>
+                    <td data-label="Género">{{ obra.genero|default:"-" }}</td>
+                    <td data-label="Tonalidade">{{ obra.tonalidade|default:"-" }}</td>
+                    <td data-label="Órgãos">{{ obra.num_orgaos }}</td>
+                    <td data-label="Registações">{{ obra.num_registacoes }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -119,6 +136,7 @@
     <p class="empty">Sem resultados para os filtros selecionados.</p>
     {% endif %}
 </section>
+
 
 <a class="back" href="{% url 'landing' %}">Voltar para Início</a>
 {% endblock %}
