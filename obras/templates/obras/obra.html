@@ -113,5 +113,12 @@
             <h2>Referências</h2>
             <p class="text-paragraph">{{ obra.referencias|default:"Sem referências cadastradas." }}</p>
         </article>
+
+        {% if obra.info_catalogo %}
+        <article class="card card-full" style="animation-delay: 340ms;">
+            <h2>Catálogo</h2>
+            <div class="text-paragraph catalogo-html">{{ obra.info_catalogo|safe }}</div>
+        </article>
+        {% endif %}
     </section>
 {% endblock %}

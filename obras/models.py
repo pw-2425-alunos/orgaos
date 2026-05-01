@@ -91,6 +91,7 @@ class Obra(models.Model):
     onomastica = models.TextField(blank=True)
     referencias = models.TextField(blank=True)
     observacoes = models.TextField(blank=True, default="")
+    info_catalogo = models.TextField(blank=True, default="")
     codigo = models.CharField(max_length=50, blank=True, default="")
 
     def __str__(self):

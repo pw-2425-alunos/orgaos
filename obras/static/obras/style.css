@@ -549,6 +549,21 @@ tbody tr:hover {
     font-style: italic;
 }
 
+.catalogo-html img {
+    width: auto;
+    height: 1em;
+    vertical-align: middle;
+}
+
+.catalogo-html p > img:only-child,
+.catalogo-html li > img:only-child,
+.catalogo-html div > img:only-child,
+.catalogo-html figure > img:only-child {
+    display: block;
+    width: 50%;
+    height: auto;
+}
+
 .search-form button.back {
     border: 0;
     cursor: pointer;

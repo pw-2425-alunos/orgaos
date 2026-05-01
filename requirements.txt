@@ -10,3 +10,5 @@ cryptography
 whitenoise
 gunicorn
 django-ninja
+python-docx
+beautifulsoup4
