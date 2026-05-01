@@ -11,9 +11,9 @@ Para carregar dados na base de dados, este projeto usa duas origens distintas:
 
 Não é preciso alterar código para mudar a localização destes ficheiros. Os caminhos podem ser passados diretamente nos commands.
 
-### Excel
+### ETL Excel ➡️ BD
 
-Por omissão:
+Por omissão carrega Excel de `auxiliar/`:
 ```parse
 > python .\manage.py gera_json
 ```
@@ -28,9 +28,9 @@ Também é possível escolher explicitamente onde gravar o JSON gerado:
 > python .\manage.py gera_json --excel-file "C:\Users\lucio\Downloads\catalogo\catalogo_todas_as_obras.xlsx" --output auxiliar\short.json
 ```
 
-### Word / DOCX
+### ETL Catalogos em Word ➡️ BR
 
-Por omissão:
+Por omissão, carrega words da pasta `auxiliar/catalogo`:
 ```parse
 > python .\manage.py import_catalogo_info
 ```
@@ -94,7 +94,7 @@ Com caminho explícito para o JSON:
 Notas:
 * `gera_json` lê por omissão `auxiliar/catalogo_todas_as_obras.xlsx` e escreve `auxiliar/short.json`.
 * `carrega_obras` lê por omissão `auxiliar/short.json`.
-* Os scripts [c:\Users\lucio\Downloads\orgaos-1\auxiliar\gera_json.py](c:\Users\lucio\Downloads\orgaos-1\auxiliar\gera_json.py) e [c:\Users\lucio\Downloads\orgaos-1\carrega_obras.py](c:\Users\lucio\Downloads\orgaos-1\carrega_obras.py) continuam a expor a lógica, mas o ponto de entrada recomendado passa a ser via `manage.py`.
+* O fluxo oficial deve ser feito via `manage.py`, usando os commands `gera_json` e `carrega_obras`.
 
 # Catalogo PDF / Word
 
